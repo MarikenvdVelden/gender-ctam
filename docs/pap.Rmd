@@ -1,0 +1,184 @@
+---
+title: "Pre-Analysis Plan: Gender 'n Computational Social Science Publications"
+date: "`r format(Sys.time(), '%d %B, %Y - %X (%Z)')`"
+output: 
+  pdf_document:
+    toc: yes
+    number_sections: true
+editor_options: 
+  chunk_output_type: console
+bibliography: references.bib
+urlcolor: blue
+linkcolor: blue
+header-includes:
+   - \usepackage{floatrow}
+   - \floatsetup[figure]{capposition=top}
+   - \floatsetup[table]{capposition=top}
+   - \usepackage{booktabs}
+   - \usepackage{longtable}
+   - \usepackage{array}
+   - \usepackage{multirow}
+   - \usepackage{wrapfig}
+   - \usepackage{float}
+   - \usepackage{colortbl}
+   - \usepackage{pdflscape}
+   - \usepackage{tabu}
+   - \usepackage{threeparttable}
+   - \usepackage{threeparttablex}
+   - \usepackage[normalem]{ulem}
+   - \usepackage{makecell}
+   - \usepackage{xcolor}
+---
+```{r setup, include=FALSE}
+## include this at top of your RMarkdown file for pretty output
+## make sure to have the printr package installed: install.packages('printr')
+knitr::opts_chunk$set(message = FALSE, warning = FALSE, echo = FALSE)
+#library(printr)
+library(tidyverse)
+library(kableExtra)
+options(kableExtra.latex.load_packages = FALSE)
+```
+
+\newpage
+
+# Expectations
+@gatto2020selecting demonstrates that while women cover significantly fewer methods courses in their doctoral training, when they do participate in methods training, they, however, show similar levels of method employment to their male colleagues.
+Yet, @teele_thelen_2017 demonstrate that women are less likely to publish studies  using quantitative and computational methods (see @maliniak_powers_walter_2013 for a similar argument in International Relations).
+@brown_horiuchi_htun_samuels_2020 demonstrate that the _gender submission gap_ is accompanied by a _gender perception gap_: Women report that they are more likely to submit to and get published in some journals, whereas men report as such with regard to other journals. Importantly, these gaps are observed even among scholars with the same methodological (i.e., quantitative or qualitative) approach.
+The editors of top-journals in politicial science have investigated the role of the review process finding no indication for gender bias in the editorial process [@breuning_gross_feinberg_martinez_sharma_ishiyama_2018;@koenig_ropers_2018;@brown_samuels_2018].
+The authors all suggest that the submission pools are distorted by gender.
+
+We test X pathways that could distort the submission pool: a) playing it safe due to the gender perception gap, and b) the Mathilda effect.
+Papers using CTAM are more likely to be published in journals with a _"masculinized" perception gap_.
+When women are aiming for these journals, it could be that they ``play it safe'' by conducting more validation checks than their men.
+Moreover, embracing of the _Mathilda effect_ [@rossiter1993matthew] -- i.e. the systematic underrecognition of female scientists -- women scholars are more likely to indicate that a) there are important training needs in more areas; and b) they themselves need (further) training in computational methods and use these reasons not to publish employing these methods.
+
+**Play it Safe hypothesis** (_H1a_):  Women scholars are more likely to play it safe and indicate more validation strategies than men scholars.
+
+**Play it Safe hypothesis** (_H1b_): Women scholars are more likely to play it safe and indicate more challenges as reasons **not** to use CTAM than men scholars.
+
+**Mathilda effect hypothesis** (_H2a_):  Women scholars are more likely to indicate a higher number of important training needs than men scholars.
+
+**Mathilda effect hypothesis** (_H2b_):  Women scholars are more likely to indicate that they themselves require (further advanced) training than men scholars.
+
+
+# Research Desing and Protocol
+
+## Sample
+We have condected an expert survey, inviting all scholars published a scientific article between January 2016 and September 2020 (`N = 45,437`).
+Using a keyword search on the Web of Science, we then identified a total of 7,296 _potentially_ relevant articles whose abstracts referred to some kind of textual contents or text analytic procedures.
+We then accessed the full text of these articles to determine whether the presented research included any form of quantitative textual analysis. 
+Quantitative textual analysis was defined broadly to include any form of processing natural language that identified specific kinds of textual contents with the purpose of classification and quantitative analysis.
+Analyses that relied solely on metadata or pre-existing classifications were excluded, as were investigations accessing only formal properties of the sampled texts (e.g., length).
+We included analyses of multi-modal media (e.g., posters, television) as long as textual contents were informative toward classification.
+Purely methodological contributions discussing specific potentials or limitations of available methods were excluded, unless they included applied demonstrations wherein actual textual data was processed.
+Articles were considered relevant as soon as they used any form of quantitative textual analysis, even if it was used merely in an auxiliary capacity (e.g., a content analysis to identify frames to be used in an experiment; sentiment analyses of open-ended survey responses).
+This screening yielded a total of `N = 854` articles, for which the authors were looked up.
+This yielded us with 1,653 identifiable and working email-addresses. 
+
+The experts have been invited to the questionnaire on March 4th of 2021, and received two reminders, each approximately a week after our last message (respectively on March 11th and March 16th of 2021).
+This yielded a responses of 421 responses (i.e. response rate of `25%`).
+The study has been approved by the Research Ethics Review Committee of the [_Vrije Universiteit Amsterdam_](#), [_Hebrew University Jerusalem Isreal_](#), and [_university College Dublin_](#).
+
+# Measures
+
+## Dependent Variables
+I rely on four measures reflecting different aspects of "playing it safe" and "embracing the Mathilda effect".
+
+1. _Number of Validation Strategies (H1a)_ In this measure, respondents are asked to tick as many options as used to validate their CTAM, choosing from:
+
+- I check the documentation of the software developer
+- I check whether findings are plausible and interpretable 
+- I compare machine-made classifications (i.e. coded outputs) against manually coded/given standards
+- I check whether the classification rules/criteria are valid (e.g., check for meaningful indicators in a dictionary)
+- I evaluate how well the algorithmic procedures match my concept of interest (e.g., checking adequacy of bag-of-words assumption)
+- Other: (Open ended)
+
+2. _Reported Challenges (H1b)_ In this measure, respondents are asked to indicate the challenges encountered when using/ or reasons not to use CTAM, choosing from: 
+
+- Time/effort required (e.g. technical requirements, experience)
+- Funding required (e.g., for training, fees)
+- Availability of required training in computational methods
+- Limited methodological guidance/documentation of tools
+- Level of instruction and materials higher than needed
+- Level of instruction/materials lower than needed
+- Availability of suitable computational tools for certain languages
+- Comparability of computational tools in different languages
+- Issues concerning measurement validity/limited nuance
+- Loss of manual contact with the material
+- Reviewers'/editors' skepticism toward computational methods among 
+- Peers' skepticism  toward computational methods
+- I am skeptical toward computational methods myself
+- Other challenges: (Open ended)
+
+3. _More training needs -- general (H2a)_ measured with the question "_Do you believe that, in the context of your training activities, there are important training needs in relation to computational text analysis in any of the following areas?_"
+Respondents had the following answer options:
+
+- Data and open access tools, please specify: (Open ended)
+- Programming and software skills, please specify: (Open ended)
+- Theory and concepts, please specify: (Open ended)
+- Research integrity, ethics, please specify: (Open ended)
+- Other: (Open ended)
+
+4. _More training needs -- individual (H2b)_ was measured by asking whether respondents would be interested themselves to receive (further) training. 
+Respondents had the following answer options:
+
+- Yes, I would like to learn more about: (Open ended)
+- No, my skills are sufficient
+- No, I do not plan to use computational text analysis anytime soon
+- No, for other reasons: (Open ended)
+
+## Independent Variable
+We will use the gender reported by the scholar as the independent variable in the analyses.
+
+## Control Variables
+
+As control variables, the following will be included in the analyses: _Academic discipline_, _time in academia_, _software knowledge_, _types of content analysis used_.
+
+- _Academic discipline_ is measured by asking in which field(s) the respondent is active as a researcher: `Communications`, `Economics`, `Political Science`, `Psychology`, `Sociology`, and `Other`.
+
+- _time in academia_ is measured by asking whether the respondent is a `PhD student`, an `early-career researcher (<5 years since PhD)`, a `mid-career researcher (5-15 years since PhD)`, or a `senior researcher (>15 years since PhD)`.
+
+- _software knowledge_ is measured by asking much you use the following kinds of software in your own research, ranging from `not at all` till `primary method of my research` on a 5 point scale. The options are:
+
+  - Statistical Software (e.g., SPSS, Stata, SAS)
+  - Mathematical Software (e.g., Matlab, Octave)
+  - Network Analysis Software (e.g., Gephi, Pajek, UCInet) 
+  - Qualitative Data Analysis Software (e.g., MaxQDA, Atlas.ti, Nvivo)
+  - Specialized Text Mining Software (e.g., LIWC)
+  - Generalized Text Analysis Platforms (e.g., AmCAT)
+  - Open Source Coding Platforms (e.g., Python, R, Julia)
+  - Other: (Open ended)
+
+- _types of content analysis used_ is measured by asking much you use the following kinds of text analysis methods in your own research, ranging from `not at all` till `primary method of my research` on a 5 point scale. The options are:
+
+  -  Qualitative text analysis (e.g., discourse analysis, conversation analysis)
+  - Quantitative manual text analysis (e.g., manual content analysis)
+  - Computational text analysis (e.g., automated content analysis, machine learning, text mining)
+  - Other methods: (Open ended)
+
+## Exclusion Criteria & Missing Values
+Participants are requested to respond to each question.
+We employ the following criteria: If `10%` or less of the values on the dimension are missing, then we re-code the missing values to the overall mean.
+If `11%` or more of the values on the dimension are missing, then we re-code the missing values to a constant (for instance 0) and include a dummy variable indicating whether the response on the covariate was missing or not.
+
+
+# Analysis
+We test the hypotheses formulated in [Section 1](#expectations) by fitting linear regression models for each dependent variable.
+In each model, will estimate the coefficient for gender of participant.
+
+## Hypothesis 1 & 2
+I test the _playing it safe hypothesis_ and the _Mathilda effect hypothesis_ using Equation \ref{eq:h1} below.
+The coefficient of $\beta_{1}$ denotes the difference in number of validation strategies reported (H1a), the difference in number of challenges reported (H1b), the difference in general training needs reported (H1a), and the difference in individual training needs reported (H1b), by women and men scholars.
+If the effect of $\beta_{1}$ is positive and statistically siginificant, the hypotheses will be confirmed.
+
+\begin{equation}\label{eq:h1}
+  \hat{Y} = \beta_{0} + \beta_{1}Female  + \beta_{2-5}Controls + \varepsilon
+\end{equation}
+
+## Statistical Significance
+All the hypotheses are directional, and therefore all of the tests will be one-tailed.
+I will use an `\alpha`-value of `0.05` as the value for statistical significance in all models above.
+
+\newpage
+# References
