@@ -1,0 +1,72 @@
+---
+title: 'Analyses'
+author: 
+output: 
+  github_document:
+always_allow_html: true
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r "setup", include=FALSE}
+library(knitr)
+opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE,
+                      fig.align = "center",
+                      fig.path=('../../report/figures/'))
+options(scipen = 1, digits = 2)
+library(rmarkdown)
+```
+
+# Scripts
+
+
+# Required Packages &amp; Reproducibility
+```{r "env", message=FALSE, warning=F}
+rm(list=ls())
+source(here::here("src/lib/functions.R"))
+```
+
+# Pre-Registered Analyses
+
+```{r "data for analyses"}
+load(here("data/intermediate/clean_data.RData"))
+```
+
+Next, we automatically extract a `.md` file for the online appendix, as well as a  latex table for the manuscript. 
+We are using jinja2 template [src/analysis/table_descriptives.tex.j2](table.tex.j2) which is called with a json string containing the data.
+To replicate, make sure `env/bin/pip install -U j2cli` is installed via your command line.
+
+```{r "Table with Descriptives"}
+source(here("src/analysis/descriptive-information-overview.R"))
+table2 <- knitr::kable(descr, digits=2)
+fn <- here("report/figures/table_descriptives.tex")
+cat("# Table: Descriptive Information of Variables under Study \n\n", file=fn)
+cat(table2, file=fn, sep="\n", append=T)
+
+methodnames <- setNames(as.list(descr$Variables), descr$Variables)
+table <- purrr::map(descr, .f= ".") 
+#render_j2(here("src/analysis/table_descriptives.tex.j2"), here("report/figures/table_descriptives.tex"),
+#          data=list(data=table, methods=methodnames))
+rm(descr, methodnames, table, fn, table2)
+```
+
+## Pre-Registered Hypotheses 
+```{r "h-pre-reg", fig.align="center", fig.height=10, fig.width=10}
+source(here("src/analysis/pre-registered.R"))
+p
+
+kbl(df, booktabs =T, caption = "Effect of Identifying as Female for Pre-Registered Hypothesis") %>%
+  kable_styling(latex_options = c("striped", "hold_position"),
+                full_width = F, fixed_thead = T, position = "center") %>%
+  column_spec(1, width = "10cm") %>%
+  column_spec(2, width = "2cm")  %>%
+  column_spec(3, width = "4cm") %>%
+  column_spec(4, width = "4cm")
+```
+
+## Explorative Results
+```{r "explorative", fig.align="center",  fig.height=10, fig.width=10}
+source(here("src/analysis/explorative.R"))
+p_disc
+p_career
+```

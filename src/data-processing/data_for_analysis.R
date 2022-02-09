@@ -10,10 +10,17 @@ d <- df %>%
          n_challenges = sum(c(Q10_1, Q10_2, Q10_3, Q10_4, Q10_5, Q10_6, 
                               Q10_7, Q10_8, Q10_9, Q10_10, Q10_11, Q10_12, 
                               Q10_13, Q10_14, Q10_15)),
-         n_training_needs_gen = sum(c(Q15_1, Q15_2, Q15_3, Q15_4))) %>% 
+         n_training_needs_gen = sum(c(Q15_1, Q15_2, Q15_3, Q15_4)),
+         multidisc = sum(c(Q18_1, Q18_2, Q18_3, Q18_4, Q18_5, Q18_Other))) %>% 
   ungroup() %>%
   mutate(n_training_needs_ind = if_else(Q16 ==  1, 1, 0),
          gender = if_else(gender == "female", 1, 0),
+         career = recode(career,
+                         `1` = "PhD Student",
+                         `2` = "Early-Career Researcher (<5 years since PhD)",
+                         `3` = "Mid-Career Researcher (5-15 years since PhD)",
+                         `4` = "Senior Researcher (>15 years since PhD)",
+                         .default = "NA"),
          n_val_strat = if_else(is.na(n_val_strat), round(mean(n_val_strat, na.rm=T)), n_val_strat),
          n_challenges = if_else(is.na(n_challenges), round(mean(n_challenges, na.rm=T)), n_challenges),
          n_training_needs_gen = if_else(is.na(n_training_needs_gen), round(mean(n_training_needs_gen, na.rm=T)), 
@@ -21,12 +28,15 @@ d <- df %>%
          n_training_needs_ind_miss = if_else(is.na(n_training_needs_ind), 1, 0),
          n_training_needs_ind = if_else(is.na(n_training_needs_ind), round(mean(n_training_needs_ind, na.rm=T)), 
                                         n_training_needs_ind),
-         comsci = if_else(Q18_1==1, 1, 0),
-         econ = if_else(Q18_2==1, 1, 0),
-         polisci = if_else(Q18_3==1, 1, 0),
-         psy = if_else(Q18_4==1, 1, 0),
-         soc = if_else(Q18_5==1, 1, 0),
-         other = if_else(Q18_Other==1,1,0),
+         discipline = "Discipline: Other",
+         discipline = if_else(multidisc == 0, "Discipline: Other", discipline),
+         discipline = if_else(multidisc > 1, "Multi-Disciplinary", discipline),
+         discipline = if_else(multidisc == 1 & Q18_1 == 1, "Discipline: Communication Science", discipline),
+         discipline = if_else(multidisc == 1 & Q18_2 == 1, "Discipline: Economics", discipline),
+         discipline = if_else(multidisc == 1 & Q18_3 == 1, "Discipline: Political Science", discipline),
+         discipline = if_else(multidisc == 1 & Q18_4 == 1, "Discipline: Psychology", discipline),
+         discipline = if_else(multidisc == 1 & Q18_5 == 1, "Discipline: Sociology", discipline),
+         discipline = if_else(multidisc == 1 & Q18_Other == 1, "Discipline: Other", discipline),
          stats_softw = if_else(is.na(Q3_1), round(mean(Q3_1, na.rm=T)), Q3_1),
          math_softw = if_else(is.na(Q3_2), round(mean(Q3_2, na.rm=T)), Q3_2),
          netw_softw = if_else(is.na(Q3_3), round(mean(Q3_3, na.rm=T)), Q3_3),
@@ -36,12 +46,18 @@ d <- df %>%
          opensource_platf = if_else(is.na(Q3_7), round(mean(Q3_7, na.rm=T)), Q3_7),
          quali_txt = if_else(is.na(Q2_1), round(mean(Q2_1, na.rm=T)), Q2_1),
          man_txt = if_else(is.na(Q2_2), round(mean(Q2_2, na.rm=T)), Q2_2),
-         comp_txt = if_else(is.na(Q2_3), round(mean(Q2_3, na.rm=T)), Q2_3)) %>% 
+         comp_txt = if_else(is.na(Q2_3), round(mean(Q2_3, na.rm=T)), Q2_3),
+         career = if_else(is.na(career), median(career, na.rm=T), career)) %>% 
   select(id, gender, n_val_strat, n_challenges, n_training_needs_gen, n_training_needs_ind,
-         comsci, econ, polisci, psy, soc, other, stats_softw,
+         career, discipline, stats_softw,
          math_softw, netw_softw, quali_softw,
          txt_softw, txt_platf, opensource_platf,
-         quali_txt, man_txt, comp_txt)
+         quali_txt, man_txt, comp_txt) %>%
+  mutate(career = factor(career,
+                         levels = c("PhD Student",
+                                    "Early-Career Researcher (<5 years since PhD)",
+                                    "Mid-Career Researcher (5-15 years since PhD)",
+                                    "Senior Researcher (>15 years since PhD)")))
   
 remove(df)
                 

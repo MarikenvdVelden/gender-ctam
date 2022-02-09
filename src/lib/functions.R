@@ -1,4 +1,5 @@
 library(here)
+library(kableExtra)
 library(tidyverse)
 library(DeclareDesign)
 library(scales)
@@ -6,6 +7,7 @@ library(cobalt)
 library(ggstatsplot)
 library(patchwork)
 library(qualtRics)
+library(margins)
 
 fig_cols <- yarrr::piratepal(palette = "basel", 
              trans = .2)
