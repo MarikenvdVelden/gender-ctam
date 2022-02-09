@@ -1,0 +1,110 @@
+---
+title: 'Prepare Data'
+author: 
+output: 
+  github_document:
+    toc: yes
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r "setup", include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE,
+                      fig.align = "center",
+                      fig.path=('../../report/figures/'))
+library(printr)
+options(digits = 2)
+library(rmarkdown)
+```
+
+## Required Packages &amp; Reproducibility
+```{r "env", message=FALSE, warning=F, results='hide'}
+rm(list=ls())
+source(here::here("src/lib/functions.R"))
+#renv::snapshot()
+```
+
+## Tidy Data
+This code chuck downloads the data from Qualtrics using the API and cleans the raw data.
+
+```{r "get data from Qualtrics", results="hide"}
+d <- fetch_survey(surveyID = "SV_0DMqk8UcwVLGrNH", 
+                    verbose = TRUE, force_request = T,
+                    label = FALSE, convert = FALSE)  %>%
+  filter(consent == 0)
+source(here("src/data-processing/clean_data.R"))
+```
+
+## Save Data for Analysis
+```{r "save data"}
+source(here("src/data-processing/data_for_analysis.R"))
+save(d, file = here("data/intermediate/clean_data.RData"))
+```
+
+## Visualization of Data
+
+### Dependent Variable per Gender
+```{r "Dependent Variable", echo=F, fig.width=10, fig.height=8, warning=FALSE}
+d %>%
+  select(n_val_strat, n_challenges, n_training_needs_gen, 
+                n_training_needs_ind, gender) %>%
+  pivot_longer(cols = n_val_strat:n_training_needs_ind,
+               names_to = "dvs") %>%
+  mutate(dvs = recode(dvs,
+                       n_val_strat = "Number of Validation Strategies (H1a) \n Scale: 0 - 6",
+                       n_challenges = "Number of Reported Challenges (H1b) \n Scale: 0 - 15",
+                       n_training_needs_gen = "Amount of Training Needs in General (H2a) \n Scale: 0 - 4",
+                       n_training_needs_ind = "Individual Training Need (H2b) \n Scale: 0 - 1"),
+         value = as.numeric(value),
+         gender = recode(gender, `1` = "Female", `0` = "Male", .missing = "Male", .default = "Male")) %>%
+  group_by(dvs, gender) %>%
+  summarise(means = mean(value, na.rm=T),
+            stdev = sd(value, na.rm=T)) %>%
+  ungroup() %>% 
+  mutate(lower = means - (1.56 * stdev),
+         upper = means + (1.56 * stdev)) %>% 
+  ggplot(aes(x = dvs, y = means,
+             ymin = lower, ymax = upper, color = gender)) +
+  geom_point(position = position_dodge(.5), size = 3) + 
+  geom_errorbar(position = position_dodge(.5), width = 0, alpha = .6) +
+  labs(y = "", 
+       x = "") +
+  theme_ipsum() +
+  scale_color_manual(values = fig_cols) +
+  coord_flip() +
+  theme(plot.title = element_text(hjust = 0.5),
+        legend.position="bottom",
+        legend.title = element_blank()) 
+```
+
+### Correlations Matrix
+```{r "Correlations Matrix", echo=F, message=F, warning=F, fig.width=15, fig.height=15}
+d %>%
+  select(`Gender` = gender,
+         `Number of Validation Strategies` = n_val_strat,
+         `Number of Reported Challenges` = n_challenges,
+         `Amount of Training Needs in General`  = n_training_needs_gen,
+         `Individual Training Need` = n_training_needs_ind,
+         `Discipline: Communication Science`  = comsci,
+         `Discipline: Economics`  = econ,
+         `Discipline: Political Science`  = polisci,
+         `Discipline: Psychology`  = psy,
+         `Discipline: Sociology`  = soc,
+         `Discipline: Other`  = other,
+         `Software Knowledge: Statistical Software`  = stats_softw,
+         `Software Knowledge: Mathematical Software`  = math_softw,
+         `Software Knowledge: Network Analysis Software`  = netw_softw,
+         `Software Knowledge: Qualitative Data Analysis Software`  = quali_softw,
+         `Software Knowledge: Specialized Text Mining Software`  = txt_softw,
+         `Software Knowledge: Generalized Text Analysis Platforms`  = txt_platf,
+         `Software Knowledge: Open Source Coding Platforms`  = opensource_platf,
+         `Type of Content Analysis: Qualitative Text Analysis`  = quali_txt,
+         `Type of Content Analysis: Quantitative Manual Text Analysis`  = man_txt,
+         `Type of Content Analysis: Computational Text Analysis`  = comp_txt) %>%
+  ggcorrmat(
+  type = "robust", # correlation method
+  cor.vars = c(everything()), # a range of variables can be selected
+  colors = c(fig_cols[1], fig_cols[4], fig_cols[8]),
+  title = "Correlalogram for Variables under Study"
+)
+```
