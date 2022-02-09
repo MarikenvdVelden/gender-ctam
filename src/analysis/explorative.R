@@ -157,4 +157,4 @@ p_career <- m3a %>%
   theme(plot.title = element_text(hjust = 0.5),
         legend.position="bottom",
         legend.title = element_blank()) +
-  guides(color=guide_legend(nrow=2,byrow=TRUE))
+  guides(color=guide_legend(nrow=3,byrow=TRUE))

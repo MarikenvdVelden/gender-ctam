@@ -15,7 +15,9 @@ The following data files might be of interest:
 See the scripts in [src/data-processing](src/data-processing/prep_data.md) for details on how these files were constructed.
 
 ## Results
-* [Expert Survey](src/analysis/analyses.md) Demonstrates the analyses to test and visualise hypothesis 1 and hypothesis 2. In addition, we report the exploratory results for:
+* [Expert Survey](src/analysis/analysis.md) Demonstrates the analyses to test and visualise hypothesis 1 and hypothesis 2. In addition, we report the exploratory results for:
+	- Interaction between gender and disciplines
+	- Interaction between gender and amount of years in academia
 
 ## Code of Conduct
 Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.

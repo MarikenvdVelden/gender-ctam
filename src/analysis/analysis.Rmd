@@ -51,7 +51,7 @@ rm(descr, methodnames, table, fn, table2)
 ```
 
 ## Pre-Registered Hypotheses 
-```{r "h-pre-reg", fig.align="center", fig.height=10, fig.width=10}
+```{r "h-pre-reg", fig.align="center", fig.height=6, fig.width=10}
 source(here("src/analysis/pre-registered.R"))
 p
 
