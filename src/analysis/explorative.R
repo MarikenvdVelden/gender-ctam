@@ -17,60 +17,64 @@ e1a <- lm(n_val_strat ~ gender*factor(discipline) + factor(career) +
             stats_softw + math_softw + netw_softw + quali_softw + txt_softw + 
             txt_platf + opensource_platf + quali_txt + man_txt + comp_txt, data = df)
 
-m1a <- summary(margins(e1a, variables = "discipline", at = list(gender = 1))) %>% 
+m1a <- summary(margins(e1a, variables = "discipline", at = list(gender = c(0:1)))) %>% 
   mutate(y = "DV: Number of Validation Strategies",
          lower = AME - (1.65 * SE),
          upper = AME + (1.65 * SE),
-         discipline = c("Discipline: Communication Science",
-                        "Discipline: Political Science",
-                        "Multi-Disciplinary")) %>%
-  select(AME, upper, lower, y, discipline)
+         discipline = c(rep("Discipline: Communication Science",2),
+                        rep("Discipline: Political Science",2),
+                            rep("Multi-Disciplinary",2)),
+         gender = recode(gender, `0` = "Male", `1` = "Female")) %>%
+  select(AME, upper, lower, y, discipline, gender)
 
 
 #challenges
 e1b <- lm(n_challenges ~ gender*factor(discipline) + factor(career) +
             stats_softw + math_softw + netw_softw + quali_softw + txt_softw + 
             txt_platf + opensource_platf + quali_txt + man_txt + comp_txt, data = df)
-m1b <- summary(margins(e1b, variables = "discipline", at = list(gender = 1))) %>% 
+m1b <- summary(margins(e1b, variables = "discipline", at = list(gender = c(0:1)))) %>% 
   mutate(y = "DV: Number of Reported Challenges",
          lower = AME - (1.65 * SE),
          upper = AME + (1.65 * SE),
-         discipline = c("Discipline: Communication Science",
-                        "Discipline: Political Science",
-                        "Multi-Disciplinary")) %>%
-  select(AME, upper, lower, y, discipline)
+         discipline = c(rep("Discipline: Communication Science",2),
+                        rep("Discipline: Political Science",2),
+                        rep("Multi-Disciplinary",2)),
+         gender = recode(gender, `0` = "Male", `1` = "Female")) %>%
+  select(AME, upper, lower, y, discipline, gender)
 
 #training needs general
 e2a <- lm(n_training_needs_gen ~ gender*factor(discipline) + factor(career) +
             stats_softw + math_softw + netw_softw + quali_softw + txt_softw + 
             txt_platf + opensource_platf + quali_txt + man_txt + comp_txt, data = df)
-m2a <- summary(margins(e2a, variables = "discipline", at = list(gender = 1))) %>% 
+m2a <- summary(margins(e2a, variables = "discipline", at = list(gender = c(0:1)))) %>% 
   mutate(y = "DV: Amount of Training Needs in General",
          lower = AME - (1.65 * SE),
          upper = AME + (1.65 * SE),
-         discipline = c("Discipline: Communication Science",
-                        "Discipline: Political Science",
-                        "Multi-Disciplinary")) %>%
-  select(AME, upper, lower, y, discipline)
+         discipline = c(rep("Discipline: Communication Science",2),
+                        rep("Discipline: Political Science",2),
+                        rep("Multi-Disciplinary",2)),
+         gender = recode(gender, `0` = "Male", `1` = "Female")) %>%
+  select(AME, upper, lower, y, discipline, gender)
 
 #H2b Women scholars are more likely to indicate that they themselves require (further advanced) training than men scholars
 e2b <- lm(n_training_needs_ind ~ gender*factor(discipline) + factor(career) +
             txt_platf + opensource_platf + quali_txt + man_txt + comp_txt, data = df)
-m2b <- summary(margins(e2b, variables = "discipline", at = list(gender = 1))) %>% 
+m2b <- summary(margins(e2b, variables = "discipline", at = list(gender = c(0:1)))) %>% 
   mutate(y = "DV: Individual Training Need",
          lower = AME - (1.65 * SE),
          upper = AME + (1.65 * SE),
-         discipline = c("Discipline: Communication Science",
-                        "Discipline: Political Science",
-                        "Multi-Disciplinary")) %>%
-  select(AME, upper, lower, y, discipline)
+         discipline = c(rep("Discipline: Communication Science",2),
+                        rep("Discipline: Political Science",2),
+                        rep("Multi-Disciplinary",2)),
+         gender = recode(gender, `0` = "Male", `1` = "Female")) %>%
+  select(AME, upper, lower, y, discipline, gender)
 
 p_disc <- m1a %>% 
   add_case(m1b) %>% 
   add_case(m2a) %>% 
   add_case(m2b) %>% 
    ggplot(aes(x = y, y = AME,
-             ymin = lower, ymax = upper, color = discipline)) +
+             ymin = lower, ymax = upper, color = discipline, shape = gender)) +
   geom_point(position = position_dodge(.5), size = 3) + 
   geom_errorbar(position = position_dodge(.5), width = 0, alpha = .6) +
   labs(x = "", 
@@ -91,61 +95,62 @@ e3a <- lm(n_val_strat ~ gender*factor(career) + factor(discipline) +
             stats_softw + math_softw + netw_softw + quali_softw + txt_softw + 
             txt_platf + opensource_platf + quali_txt + man_txt + comp_txt, data = df)
 
-m3a <- summary(margins(e3a, variables = "career", at = list(gender = 1))) %>% 
+m3a <- summary(margins(e3a, variables = "career", at = list(gender = c(0:1)))) %>% 
   mutate(y = "DV: Number of Validation Strategies",
          lower = AME - (1.65 * SE),
          upper = AME + (1.65 * SE),
-         career = c("Early-Career Researcher (<5 years since PhD)",
-                        "Mid-Career Researcher (5-15 years since PhD)",
-                        "Senior Researcher (>15 years since PhD)")) %>%
-  select(AME, upper, lower, y, career)
+         career = c(rep("Early-Career Researcher (<5 years since PhD)",2),
+                    rep("Mid-Career Researcher (5-15 years since PhD)",2),
+                    rep("Senior Researcher (>15 years since PhD)",2))) %>%
+  select(AME, upper, lower, y, career, gender)
 
 
 #challenges
 e3b <- lm(n_challenges ~ gender*factor(career) + factor(discipline) +
             stats_softw + math_softw + netw_softw + quali_softw + txt_softw + 
             txt_platf + opensource_platf + quali_txt + man_txt + comp_txt, data = df)
-m3b <- summary(margins(e3b, variables = "career", at = list(gender = 1))) %>% 
+m3b <- summary(margins(e3b, variables = "career", at = list(gender = c(0:1)))) %>% 
   mutate(y = "DV: Number of Reported Challenges",
          lower = AME - (1.65 * SE),
          upper = AME + (1.65 * SE),
-         career = c("Early-Career Researcher (<5 years since PhD)",
-                    "Mid-Career Researcher (5-15 years since PhD)",
-                    "Senior Researcher (>15 years since PhD)")) %>%
-  select(AME, upper, lower, y, career)
+         career = c(rep("Early-Career Researcher (<5 years since PhD)",2),
+                    rep("Mid-Career Researcher (5-15 years since PhD)",2),
+                    rep("Senior Researcher (>15 years since PhD)",2))) %>% 
+  select(AME, upper, lower, y, career, gender)
 
 
 #training needs general
 e4a <- lm(n_training_needs_gen ~ gender*factor(career) + factor(discipline) +
             stats_softw + math_softw + netw_softw + quali_softw + txt_softw + 
             txt_platf + opensource_platf + quali_txt + man_txt + comp_txt, data = df)
-m4a <- summary(margins(e4a, variables = "career", at = list(gender = 1))) %>% 
+m4a <- summary(margins(e4a, variables = "career", at = list(gender = c(0:1)))) %>% 
   mutate(y = "DV: Amount of Training Needs in General",
          lower = AME - (1.65 * SE),
          upper = AME + (1.65 * SE),
-         career = c("Early-Career Researcher (<5 years since PhD)",
-                    "Mid-Career Researcher (5-15 years since PhD)",
-                    "Senior Researcher (>15 years since PhD)")) %>%
-  select(AME, upper, lower, y, career)
+         career = c(rep("Early-Career Researcher (<5 years since PhD)",2),
+                    rep("Mid-Career Researcher (5-15 years since PhD)",2),
+                    rep("Senior Researcher (>15 years since PhD)",2))) %>%
+  select(AME, upper, lower, y, career, gender)
 
 #H2b Women scholars are more likely to indicate that they themselves require (further advanced) training than men scholars
 e4b <- lm(n_training_needs_ind ~ gender*factor(career) + factor(discipline) +
             txt_platf + opensource_platf + quali_txt + man_txt + comp_txt, data = df)
-m4b <- summary(margins(e4b, variables = "career", at = list(gender = 1))) %>% 
+m4b <- summary(margins(e4b, variables = "career", at = list(gender = c(0:1)))) %>% 
   mutate(y = "DV: Individual Training Need",
          lower = AME - (1.65 * SE),
          upper = AME + (1.65 * SE),
-         career = c("Early-Career Researcher (<5 years since PhD)",
-                    "Mid-Career Researcher (5-15 years since PhD)",
-                    "Senior Researcher (>15 years since PhD)")) %>%
-  select(AME, upper, lower, y, career)
+         career = c(rep("Early-Career Researcher (<5 years since PhD)",2),
+                    rep("Mid-Career Researcher (5-15 years since PhD)",2),
+                    rep("Senior Researcher (>15 years since PhD)",2))) %>%
+  select(AME, upper, lower, y, career, gender)
 
 p_career <- m3a %>% 
   add_case(m3b) %>% 
   add_case(m4a) %>% 
   add_case(m4b) %>% 
+  mutate(gender = recode(gender, `0` = "Male", `1` = "Female")) %>% 
   ggplot(aes(x = y, y = AME,
-             ymin = lower, ymax = upper, color = career)) +
+             ymin = lower, ymax = upper, color = career, shape = gender)) +
   geom_point(position = position_dodge(.5), size = 3) + 
   geom_errorbar(position = position_dodge(.5), width = 0, alpha = .6) +
   labs(x = "", 
