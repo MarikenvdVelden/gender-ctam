@@ -51,7 +51,7 @@ rm(descr, methodnames, table, fn, table2)
 ```
 
 ## Pre-Registered Hypotheses 
-```{r "h-pre-reg", fig.align="center", fig.height=6, fig.width=10}
+```{r "h-pre-reg", fig.align="center", fig.height=6, fig.width=8}
 source(here("src/analysis/pre-registered.R"))
 p
 
@@ -65,8 +65,10 @@ kbl(df, booktabs =T, caption = "Effect of Identifying as Female for Pre-Register
 ```
 
 ## Explorative Results
-```{r "explorative", fig.align="center",  fig.height=10, fig.width=10}
+```{r "explorative", fig.align="center",  fig.height=10, fig.width=20}
 source(here("src/analysis/explorative.R"))
-p_disc
-p_career
+
+descr + descr_softw + descr_method
+
+p_disc + p_career
 ```

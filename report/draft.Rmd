@@ -1,0 +1,100 @@
+---
+output: 
+  stevetemplates::article:
+    fig_caption: true
+bibliography: references.bib
+urlcolor: black
+linkcolor: black
+header-includes:
+   - \usepackage{floatrow}
+   - \floatsetup[figure]{capposition=top}
+   - \floatsetup[table]{capposition=top}
+   - \usepackage{booktabs}
+   - \usepackage{longtable}
+   - \usepackage{array}
+   - \usepackage{multirow}
+   - \usepackage{wrapfig}
+   - \usepackage{float}
+   - \usepackage{colortbl}
+   - \usepackage{pdflscape}
+   - \usepackage{tabu}
+   - \usepackage[para,online,flushleft]{threeparttable}
+   - \usepackage{threeparttablex}
+   - \usepackage[normalem]{ulem}
+   - \usepackage{makecell}
+   - \usepackage{xcolor}
+   - \usepackage{hyperref}
+   - \usepackage{array}   
+   - \usepackage{caption}
+   - \usepackage{graphicx}
+   - \usepackage{epstopdf}
+   - \usepackage{siunitx}
+   - \usepackage{multirow}
+   - \usepackage{hhline}
+   - \usepackage{calc}
+   - \usepackage{tabularx}
+   - \usepackage{fontawesome}
+   - \usepackage{amsthm}
+   - \newtheorem{hypo}{Hypothesis}
+biblio-style: apsr
+title: "Gender and CTAM"
+thanks: "Replication files are available on the author's Github account (ADD). **Current version**: `r format(Sys.time(), '%B %d, %Y')`; **Corresponding author**: Mariken A.C.G. van der Velden"
+author:
+- name: Alona Dolinsky
+  affiliation: University College Dublin
+- name: Mariken A.C.G. van der Velden
+  affiliation: Vrije Universiteit Amsterdam
+anonymous: FALSE
+abstract: "The editors of top-journals in political science have investigated the role of the review process finding no indication for gender bias in the editorial process. They suggest that the submission pools are distorted by gender. We test some pathways that could distort the submission pool: a) playing it safe due to the gender perception gap, and b) the Mathilda effect. Papers using Computational Text Analysis Methods are more likely to be published in journals with a 'masculinized' perception gap. When women are aiming for these journals, they might 'play it safe' by conducting more validation checks than their male colleagues. Moreover, embracing the Mathilda effect – i.e. the systematic under-recognition of female scientists – women scholars are more likely to indicate that a) there are important training needs in more areas; and b) they themselves need (further) training in computational methods and use these reasons not to publish employing these methods. We test these claims using a ) an unique content analysis of research articles published in the top 20 journals in communication science, political science, sociology and psychology2 between 2016 and 2020, identifying all 854 articles that involved some form of quantitative textual analysis; and b) an expert survey with all authors of quantitative text analytic research identified via said content analysis, which inquired about researchers’ considerations and concerns in the application of computational text analytic strategies."
+keywords: "Experiment, Populist Attitudes"
+geometry: margin=1in
+mainfont: cochineal
+fontsize: 11pt
+params:
+  anonymous: ""
+  doublespacing: ""
+doublespacing: TRUE
+endnote: no
+pandocparas: TRUE
+sansitup: FALSE
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,
+                      message=FALSE, warning=FALSE)
+options(kableExtra.latex.load_packages = FALSE)
+
+# Uncomment below if you want code captions
+# oldSource <- knitr::knit_hooks$get("source")
+# knitr::knit_hooks$set(source = function(x, options) {
+#   x <- oldSource(x, options)
+#   x <- ifelse(!is.null(options$code.cap), paste0(x, "\\captionof{chunk}{", options$code.cap,"}"), x)
+#   ifelse(!is.null(options$ref), paste0(x, "\\label{", options$ref,"}"), x)
+# })
+# Add `chunkcaption: TRUE` to YAML as well.
+```
+
+# Introduction
+
+
+# Data \& Results
+
+```{r data-descrip, out.width = "100%", fig.align = 'center', fig.cap = "\\label{fig:descr}Variables under Study"}
+knitr::include_graphics(here::here("report/figures", "explorative-1.png"))
+```
+
+```{r pre-reg-h, out.width = "100%", fig.align = 'center', fig.cap = "\\label{fig:pre-reg-h}Results Pre-Registered Hypotheses"}
+knitr::include_graphics(here::here("report/figures", "h-pre-reg-1.png"))
+```
+
+```{r explor-results, out.width = "100%", fig.align = 'center', fig.cap = "\\label{fig:explor}Results Explorative Analyses"}
+knitr::include_graphics(here::here("report/figures", "explorative-2.png"))
+```
+
+# Conclusion
+
+
+\newpage
+# References
+
+

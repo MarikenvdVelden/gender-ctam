@@ -139,13 +139,14 @@ DV: Individual Training Need (H2b)
 
 ``` r
 source(here("src/analysis/explorative.R"))
-p_disc
+
+descr + descr_softw + descr_method
 ```
 
 <img src="../../report/figures/explorative-1.png" style="display: block; margin: auto;" />
 
 ``` r
-p_career
+p_disc + p_career
 ```
 
 <img src="../../report/figures/explorative-2.png" style="display: block; margin: auto;" />
