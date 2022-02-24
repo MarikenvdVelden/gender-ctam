@@ -147,7 +147,8 @@ source(here("src/analysis/explorative.R"))
 <img src="../../report/figures/explorative-1.png" style="display: block; margin: auto;" />
 
 ``` r
-p_exp
+p_exp1 + p_exp2 + 
+  plot_layout(guides = "collect") & theme(legend.position = "bottom")
 ```
 
 <img src="../../report/figures/explorative-2.png" style="display: block; margin: auto;" />

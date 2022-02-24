@@ -134,27 +134,32 @@ df <- d %>%
 exp1 <- regression3(df)
 exp2 <- regression4(df)
 
-p_exp <- exp1 %>% 
-  add_case(exp2) %>% 
-  mutate(interact = factor(interact,
-                           levels = c("Discipline: Other",
-                                      "PhD Student",
-                                      "Discipline: Communication Science",
-                                      "Early-Career Researcher (<5 years since PhD)",
-                                      "Discipline: Political Science",
-                                      "Mid-Career Researcher (5-15 years since PhD)",
-                                      "Multi-Disciplinary",
-                                      "Senior Researcher (>15 years since PhD)")),
-         term = factor(term,
-                       levels = c("Discipline", "Career"))) %>% 
+p_exp1 <- exp1 %>%
+  ggplot(aes(x = y, y = AME,
+                     ymin = lower, ymax = upper, color = interact)) +
+  geom_point(position = position_dodge(.5), size = 3) + 
+  geom_errorbar(position = position_dodge(.5), width = 0, alpha = .6) +
+  labs(x = "", 
+       y = "Marginal Effect of Identifying as Female",
+       title = "Discipline") +
+  theme_ipsum() +
+  geom_hline(yintercept = 0, size = .5, linetype = "dashed", color = "gray75") +
+  coord_flip() +
+  scale_color_manual(values = fig_cols) +
+  theme(plot.title = element_text(hjust = 0.5),
+        legend.position="bottom",
+        legend.title = element_blank()) +
+  guides(color=guide_legend(nrow=4,byrow=TRUE))
+
+p_exp2 <- exp2 %>% 
    ggplot(aes(x = y, y = AME,
              ymin = lower, ymax = upper, color = interact)) +
   geom_point(position = position_dodge(.5), size = 3) + 
   geom_errorbar(position = position_dodge(.5), width = 0, alpha = .6) +
   labs(x = "", 
-       y = "Marginal Effect of Identifying as Female") +
+       y = "Marginal Effect of Identifying as Female",
+       title = "Career Stage") +
   theme_ipsum() +
-  facet_grid(.~term) +
   geom_hline(yintercept = 0, size = .5, linetype = "dashed", color = "gray75") +
   coord_flip() +
   scale_color_manual(values = fig_cols) +

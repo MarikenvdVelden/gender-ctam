@@ -72,7 +72,8 @@ source(here("src/analysis/explorative.R"))
   plot_layout(guides = "collect") & theme(legend.position = "bottom")
   
 
-p_exp
+p_exp1 + p_exp2 + 
+  plot_layout(guides = "collect") & theme(legend.position = "bottom")
 ```
 
 ```{r "types-dv", fig.align="center",  fig.height=20, fig.width=20}
