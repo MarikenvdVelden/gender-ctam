@@ -81,13 +81,13 @@ CI Upper Bound
 DV: Number of Validation Strategies (H1a)
 </td>
 <td style="text-align:right;width: 2cm; ">
--0.14
+-0.11
 </td>
 <td style="text-align:right;width: 4cm; ">
--0.38
+-0.34
 </td>
 <td style="text-align:right;width: 4cm; ">
-0.10
+0.12
 </td>
 </tr>
 <tr>
@@ -95,13 +95,13 @@ DV: Number of Validation Strategies (H1a)
 DV: Number of Reported Challenges (H1b)
 </td>
 <td style="text-align:right;width: 2cm; ">
-0.30
+0.55
 </td>
 <td style="text-align:right;width: 4cm; ">
--0.33
+-0.09
 </td>
 <td style="text-align:right;width: 4cm; ">
-0.94
+1.19
 </td>
 </tr>
 <tr>
@@ -109,13 +109,13 @@ DV: Number of Reported Challenges (H1b)
 DV: Amount of Training Needs in General (H2a)
 </td>
 <td style="text-align:right;width: 2cm; ">
-0.06
+0.10
 </td>
 <td style="text-align:right;width: 4cm; ">
--0.23
+-0.18
 </td>
 <td style="text-align:right;width: 4cm; ">
-0.35
+0.37
 </td>
 </tr>
 <tr>
@@ -123,13 +123,13 @@ DV: Amount of Training Needs in General (H2a)
 DV: Individual Training Need (H2b)
 </td>
 <td style="text-align:right;width: 2cm; ">
-0.13
+0.06
 </td>
 <td style="text-align:right;width: 4cm; ">
-0.05
+-0.02
 </td>
 <td style="text-align:right;width: 4cm; ">
-0.21
+0.14
 </td>
 </tr>
 </tbody>
@@ -140,13 +140,23 @@ DV: Individual Training Need (H2b)
 ``` r
 source(here("src/analysis/explorative.R"))
 
-descr + descr_softw + descr_method
+(descr + descr_1) / (descr_softw + descr_method) + 
+  plot_layout(guides = "collect") & theme(legend.position = "bottom")
 ```
 
 <img src="../../report/figures/explorative-1.png" style="display: block; margin: auto;" />
 
 ``` r
-p_disc + p_career
+p_exp
 ```
 
 <img src="../../report/figures/explorative-2.png" style="display: block; margin: auto;" />
+
+``` r
+source(here("src/analysis/explorative-types.R"))
+
+((pv / pt + plot_layout(guides = 'auto')) | pc) +
+  plot_layout(guides = "collect") & theme(legend.position = "bottom")
+```
+
+<img src="../../report/figures/types-dv-1.png" style="display: block; margin: auto;" />

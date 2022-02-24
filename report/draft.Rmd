@@ -37,15 +37,15 @@ header-includes:
    - \usepackage{amsthm}
    - \newtheorem{hypo}{Hypothesis}
 biblio-style: apsr
-title: "Gender and CTAM"
-thanks: "Replication files are available on the author's Github account (ADD). **Current version**: `r format(Sys.time(), '%B %d, %Y')`; **Corresponding author**: Mariken A.C.G. van der Velden"
+title: "Is Mathilda Playing it Safe? Gender in Computational Text Analysis Methods"
+thanks: "Replication files are available on the author's Github account (https://anonymous.4open.science/r/gender-ctam-CBA3/README.md). **Current version**: `r format(Sys.time(), '%B %d, %Y')`; **Corresponding author**: Mariken A.C.G. van der Velden"
 author:
 - name: Alona Dolinsky
   affiliation: University College Dublin
 - name: Mariken A.C.G. van der Velden
   affiliation: Vrije Universiteit Amsterdam
 anonymous: FALSE
-abstract: "The editors of top-journals in political science have investigated the role of the review process finding no indication for gender bias in the editorial process. They suggest that the submission pools are distorted by gender. We test some pathways that could distort the submission pool: a) playing it safe due to the gender perception gap, and b) the Mathilda effect. Papers using Computational Text Analysis Methods are more likely to be published in journals with a 'masculinized' perception gap. When women are aiming for these journals, they might 'play it safe' by conducting more validation checks than their male colleagues. Moreover, embracing the Mathilda effect – i.e. the systematic under-recognition of female scientists – women scholars are more likely to indicate that a) there are important training needs in more areas; and b) they themselves need (further) training in computational methods and use these reasons not to publish employing these methods. We test these claims using a ) an unique content analysis of research articles published in the top 20 journals in communication science, political science, sociology and psychology2 between 2016 and 2020, identifying all 854 articles that involved some form of quantitative textual analysis; and b) an expert survey with all authors of quantitative text analytic research identified via said content analysis, which inquired about researchers’ considerations and concerns in the application of computational text analytic strategies."
+abstract: "The editors of top-journals in political science have investigated the role of the review process finding no indication for gender bias in the editorial process. They suggest that the submission pools are distorted by gender. We test some pathways that could distort the submission pool: a) playing it safe due to the gender perception gap, and b) the Mathilda effect. Papers using Computational Text Analysis Methods are more likely to be published in journals with a 'masculinized' perception gap. When women are aiming for these journals, they might 'play it safe' by conducting more validation checks than their male colleagues. Moreover, embracing the Mathilda effect – i.e. the systematic under-recognition of female scientists – women scholars are more likely to indicate that a) there are important training needs in more areas; and b) they themselves need (further) training in computational methods and use these reasons not to publish employing these methods. We test these claims using a ) an unique content analysis of research articles published in the top 20 journals in communication science, political science, sociology and psychology between 2016 and 2020, identifying all 854 articles that involved some form of quantitative textual analysis; and b) an expert survey with all authors of quantitative text analytic research identified via said content analysis, which inquired about researchers’ considerations and concerns in the application of computational text analytic strategies."
 keywords: "Experiment, Populist Attitudes"
 geometry: margin=1in
 mainfont: cochineal
@@ -76,8 +76,45 @@ options(kableExtra.latex.load_packages = FALSE)
 
 # Introduction
 
+Motivation: why do we care
+
+@gatto2020selecting demonstrates that while women cover significantly fewer methods courses in their doctoral training, when they do participate in methods training, they, however, show similar levels of method employment to their male colleagues.
+Yet, @teele_thelen_2017 demonstrate that women are less likely to publish studies  using quantitative and computational methods (see @maliniak_powers_walter_2013 for a similar argument in International Relations).
+@brown_horiuchi_htun_samuels_2020 demonstrate that the _gender submission gap_ is accompanied by a _gender perception gap_: Women report that they are more likely to submit to and get published in some journals, whereas men report as such with regard to other journals. Importantly, these gaps are observed even among scholars with the same methodological (i.e., quantitative or qualitative) approach.
+The editors of top-journals in politicial science have investigated the role of the review process finding no indication for gender bias in the editorial process [@breuning_gross_feinberg_martinez_sharma_ishiyama_2018;@koenig_ropers_2018;@brown_samuels_2018].
+The authors all suggest that the submission pools are distorted by gender.
+
+We test X pathways that could distort the submission pool: a) playing it safe due to the gender perception gap, and b) the Mathilda effect.
+Papers using CTAM are more likely to be published in journals with a _"masculinized" perception gap_.
+When women are aiming for these journals, it could be that they ``play it safe'' by conducting more validation checks than their men.
+Moreover, embracing of the _Mathilda effect_ [@rossiter1993matthew] -- i.e. the systematic underrecognition of female scientists -- women scholars are more likely to indicate that a) there are important training needs in more areas; and b) they themselves need (further) training in computational methods and use these reasons not to publish employing these methods.
+
+**Play it Safe hypothesis** (_H1a_):  Women scholars are more likely to play it safe and indicate more validation strategies than men scholars.
+
+**Play it Safe hypothesis** (_H1b_): Women scholars are more likely to play it safe and indicate more challenges as reasons **not** to use CTAM than men scholars.
+
+**Mathilda effect hypothesis** (_H2a_):  Women scholars are more likely to indicate a higher number of important training needs than men scholars.
+
+**Mathilda effect hypothesis** (_H2b_):  Women scholars are more likely to indicate that they themselves require (further advanced) training than men scholars.
+
 
 # Data \& Results
+We have condected an expert survey, inviting all scholars published a scientific article between January 2016 and September 2020 (`N = 45,437`).
+Using a keyword search on the Web of Science, we then identified a total of 7,296 _potentially_ relevant articles whose abstracts referred to some kind of textual contents or text analytic procedures.
+We then accessed the full text of these articles to determine whether the presented research included any form of quantitative textual analysis. 
+Quantitative textual analysis was defined broadly to include any form of processing natural language that identified specific kinds of textual contents with the purpose of classification and quantitative analysis.
+Analyses that relied solely on metadata or pre-existing classifications were excluded, as were investigations accessing only formal properties of the sampled texts (e.g., length).
+We included analyses of multi-modal media (e.g., posters, television) as long as textual contents were informative toward classification.
+Purely methodological contributions discussing specific potentials or limitations of available methods were excluded, unless they included applied demonstrations wherein actual textual data was processed.
+Articles were considered relevant as soon as they used any form of quantitative textual analysis, even if it was used merely in an auxiliary capacity (e.g., a content analysis to identify frames to be used in an experiment; sentiment analyses of open-ended survey responses).
+This screening yielded a total of `N = 854` articles, for which the authors were looked up.
+This yielded us with 1,653 identifiable and working email-addresses. 
+
+The experts have been invited to the questionnaire on March 4th of 2021, and received two reminders, each approximately a week after our last message (respectively on March 11th and March 16th of 2021).
+This yielded a responses of 433 responses (i.e. response rate of `25%`).
+The study has been approved by the Research Ethics Review Committee of the [_Vrije Universiteit Amsterdam_](#), [_Hebrew University Jerusalem Isreal_](#), and [_University College Dublin_](#).
+
+
 
 ```{r data-descrip, out.width = "100%", fig.align = 'center', fig.cap = "\\label{fig:descr}Variables under Study"}
 knitr::include_graphics(here::here("report/figures", "explorative-1.png"))
@@ -87,9 +124,14 @@ knitr::include_graphics(here::here("report/figures", "explorative-1.png"))
 knitr::include_graphics(here::here("report/figures", "h-pre-reg-1.png"))
 ```
 
+```{r types-dv, out.width = "100%", fig.align = 'center', fig.cap = "\\label{fig:explor}Results Explorative Analyses"}
+knitr::include_graphics(here::here("report/figures", "types-dv-1.png"))
+```
+
 ```{r explor-results, out.width = "100%", fig.align = 'center', fig.cap = "\\label{fig:explor}Results Explorative Analyses"}
 knitr::include_graphics(here::here("report/figures", "explorative-2.png"))
 ```
+
 
 # Conclusion
 

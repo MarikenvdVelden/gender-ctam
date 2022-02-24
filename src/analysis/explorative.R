@@ -1,3 +1,19 @@
+# GEnder & CTAM
+descr_1 <- d %>% 
+  mutate(gender = recode(gender, `0` = "Male \n (N= 291)", 
+                         `1` = "Female \n (N = 142)", .default = "Male \n (N= 291)", .missing = 'Male \n (N= 291)'),
+         comp_txt2 = recode(comp_txt2, `1` = "Using CTAM", `0` = "Not Using CTAM")) %>% 
+  ggplot(aes(x = comp_txt2, fill = gender)) +
+  geom_bar(position = position_dodge(preserve = "single"), width = .3) +
+  theme_ipsum() +
+  labs(x = "", y = "",
+       title = "Using CTAM") +
+  coord_flip() +
+  scale_fill_manual(values = fig_cols) +
+  theme(plot.title = element_text(hjust = 0.5),
+        legend.position="bottom",
+        legend.title = element_blank()) 
+
 
 # Gender & type of text analysis/ software use
 descr <- d %>%
@@ -31,7 +47,7 @@ descr <- d %>%
   scale_color_manual(values = fig_cols) +
   coord_flip() +
   theme(plot.title = element_text(hjust = 0.5),
-        legend.position="bottom",
+        legend.position="none",
         legend.title = element_blank()) 
 
 descr_softw <- d %>% 
@@ -66,7 +82,7 @@ descr_softw <- d %>%
   scale_color_manual(values = fig_cols) +
   coord_flip() +
   theme(plot.title = element_text(hjust = 0.5),
-        legend.position="bottom",
+        legend.position="none",
         legend.title = element_blank()) 
 
 descr_method <- d %>% 
@@ -96,7 +112,7 @@ descr_method <- d %>%
   scale_color_manual(values = fig_cols) +
   coord_flip() +
   theme(plot.title = element_text(hjust = 0.5),
-        legend.position="bottom",
+        legend.position="none",
         legend.title = element_blank()) 
 
 #Interaction with discipline
@@ -115,151 +131,30 @@ df <- d %>%
                          `Mid-Career Researcher (5-15 years since PhD)` = 2,
                          `Senior Researcher (>15 years since PhD)` = 3))
 
-# Validation Stategies  
-e1a <- lm(n_val_strat ~ gender*factor(discipline) + factor(career) + 
-            stats_softw + math_softw + netw_softw + quali_softw + txt_softw + 
-            txt_platf + opensource_platf + quali_txt + man_txt + comp_txt, data = df)
+exp1 <- regression3(df)
+exp2 <- regression4(df)
 
-m1a <- summary(margins(e1a, variables = "gender", at = list(discipline = c(0:3)))) %>% 
-  mutate(y = "DV: Number of Validation Strategies",
-         lower = AME - (1.65 * SE),
-         upper = AME + (1.65 * SE),
-         discipline = c("Discipline: Other",
-                        "Discipline: Communication Science",
-                        "Discipline: Political Science",
-                         "Multi-Disciplinary")) %>%
-  select(AME, upper, lower, y, discipline)
-
-
-#challenges
-e1b <- lm(n_challenges ~ gender*factor(discipline) + factor(career) +
-            stats_softw + math_softw + netw_softw + quali_softw + txt_softw + 
-            txt_platf + opensource_platf + quali_txt + man_txt + comp_txt, data = df)
-m1b <- summary(margins(e1b, variables = "gender", at = list(discipline = c(0:3)))) %>% 
-  mutate(y = "DV: Number of Reported Challenges",
-         lower = AME - (1.65 * SE),
-         upper = AME + (1.65 * SE),
-         discipline = c("Discipline: Other",
-                        "Discipline: Communication Science",
-                        "Discipline: Political Science",
-                        "Multi-Disciplinary")) %>%
-  select(AME, upper, lower, y, discipline)
-
-#training needs general
-e2a <- lm(n_training_needs_gen ~ gender*factor(discipline) + factor(career) +
-            stats_softw + math_softw + netw_softw + quali_softw + txt_softw + 
-            txt_platf + opensource_platf + quali_txt + man_txt + comp_txt, data = df)
-m2a <- summary(margins(e2a, variables = "gender", at = list(discipline = c(0:3)))) %>% 
-  mutate(y = "DV: Amount of Training Needs in General",
-         lower = AME - (1.65 * SE),
-         upper = AME + (1.65 * SE),
-         discipline = c("Discipline: Other",
-                        "Discipline: Communication Science",
-                        "Discipline: Political Science",
-                        "Multi-Disciplinary")) %>%
-  select(AME, upper, lower, y, discipline)
-
-#H2b Women scholars are more likely to indicate that they themselves require (further advanced) training than men scholars
-e2b <- lm(n_training_needs_ind ~ gender*factor(discipline) + factor(career) +
-            txt_platf + opensource_platf + quali_txt + man_txt + comp_txt, data = df)
-m2b <- summary(margins(e2b, variables = "gender", at = list(discipline = c(0:3)))) %>% 
-  mutate(y = "DV: Individual Training Need",
-         lower = AME - (1.65 * SE),
-         upper = AME + (1.65 * SE),
-         discipline = c("Discipline: Other",
-                        "Discipline: Communication Science",
-                        "Discipline: Political Science",
-                        "Multi-Disciplinary")) %>%
-  select(AME, upper, lower, y, discipline)
-p_disc <- m1a %>% 
-  add_case(m1b) %>% 
-  add_case(m2a) %>% 
-  add_case(m2b) %>% 
+p_exp <- exp1 %>% 
+  add_case(exp2) %>% 
+  mutate(interact = factor(interact,
+                           levels = c("Discipline: Other",
+                                      "PhD Student",
+                                      "Discipline: Communication Science",
+                                      "Early-Career Researcher (<5 years since PhD)",
+                                      "Discipline: Political Science",
+                                      "Mid-Career Researcher (5-15 years since PhD)",
+                                      "Multi-Disciplinary",
+                                      "Senior Researcher (>15 years since PhD)")),
+         term = factor(term,
+                       levels = c("Discipline", "Career"))) %>% 
    ggplot(aes(x = y, y = AME,
-             ymin = lower, ymax = upper, color = discipline)) +
+             ymin = lower, ymax = upper, color = interact)) +
   geom_point(position = position_dodge(.5), size = 3) + 
   geom_errorbar(position = position_dodge(.5), width = 0, alpha = .6) +
   labs(x = "", 
        y = "Marginal Effect of Identifying as Female") +
   theme_ipsum() +
-  geom_hline(yintercept = 0, size = .5, linetype = "dashed", color = "gray75") +
-  coord_flip() +
-  scale_color_manual(values = fig_cols) +
-  theme(plot.title = element_text(hjust = 0.5),
-        legend.position="bottom",
-        legend.title = element_blank()) +
-  guides(color=guide_legend(nrow=4,byrow=TRUE))
-
-#Interaction with Academic Caareer Path
-
-# Validation Stategies  
-e3a <- lm(n_val_strat ~ gender*factor(career) + factor(discipline) +
-            stats_softw + math_softw + netw_softw + quali_softw + txt_softw + 
-            txt_platf + opensource_platf + quali_txt + man_txt + comp_txt, data = df)
-
-m3a <- summary(margins(e3a, variables = "gender", at = list(career = c(0:3)))) %>% 
-  mutate(y = "DV: Number of Validation Strategies",
-         lower = AME - (1.65 * SE),
-         upper = AME + (1.65 * SE),
-         career = c("PhD Student",
-                    "Early-Career Researcher (<5 years since PhD)",
-                    "Mid-Career Researcher (5-15 years since PhD)",
-                    "Senior Researcher (>15 years since PhD)")) %>%
-  select(AME, upper, lower, y, career)
-
-
-#challenges
-e3b <- lm(n_challenges ~ gender*factor(career) + factor(discipline) +
-            stats_softw + math_softw + netw_softw + quali_softw + txt_softw + 
-            txt_platf + opensource_platf + quali_txt + man_txt + comp_txt, data = df)
-m3b <- summary(margins(e3b, variables = "gender", at = list(career = c(0:3)))) %>% 
-  mutate(y = "DV: Number of Reported Challenges",
-         lower = AME - (1.65 * SE),
-         upper = AME + (1.65 * SE),
-         career = c("PhD Student",
-                    "Early-Career Researcher (<5 years since PhD)",
-                    "Mid-Career Researcher (5-15 years since PhD)",
-                    "Senior Researcher (>15 years since PhD)")) %>%
-  select(AME, upper, lower, y, career)
-
-#training needs general
-e4a <- lm(n_training_needs_gen ~ gender*factor(career) + factor(discipline) +
-            stats_softw + math_softw + netw_softw + quali_softw + txt_softw + 
-            txt_platf + opensource_platf + quali_txt + man_txt + comp_txt, data = df)
-m4a <- summary(margins(e4a, variables = "gender", at = list(career = c(0:3)))) %>% 
-  mutate(y = "DV: Amount of Training Needs in General",
-         lower = AME - (1.65 * SE),
-         upper = AME + (1.65 * SE),
-         career = c("PhD Student",
-                    "Early-Career Researcher (<5 years since PhD)",
-                    "Mid-Career Researcher (5-15 years since PhD)",
-                    "Senior Researcher (>15 years since PhD)")) %>%
-  select(AME, upper, lower, y, career)
-
-#H2b Women scholars are more likely to indicate that they themselves require (further advanced) training than men scholars
-e4b <- lm(n_training_needs_ind ~ gender*factor(career) + factor(discipline) +
-            txt_platf + opensource_platf + quali_txt + man_txt + comp_txt, data = df)
-m4b <- summary(margins(e4b, variables = "gender", at = list(career = c(0:3)))) %>% 
-  mutate(y = "DV: Individual Training Need",
-         lower = AME - (1.65 * SE),
-         upper = AME + (1.65 * SE),
-         career = c("PhD Student",
-                    "Early-Career Researcher (<5 years since PhD)",
-                    "Mid-Career Researcher (5-15 years since PhD)",
-                    "Senior Researcher (>15 years since PhD)")) %>%
-  select(AME, upper, lower, y, career)
-
-p_career <- m3a %>% 
-  add_case(m3b) %>% 
-  add_case(m4a) %>% 
-  add_case(m4b) %>% 
-  ggplot(aes(x = y, y = AME,
-             ymin = lower, ymax = upper, color = career)) +
-  geom_point(position = position_dodge(.5), size = 3) + 
-  geom_errorbar(position = position_dodge(.5), width = 0, alpha = .6) +
-  labs(x = "", 
-       y = "Marginal Effect of Identifying as Female") +
-  theme_ipsum() +
+  facet_grid(.~term) +
   geom_hline(yintercept = 0, size = .5, linetype = "dashed", color = "gray75") +
   coord_flip() +
   scale_color_manual(values = fig_cols) +
