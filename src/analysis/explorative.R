@@ -1,19 +1,24 @@
-# GEnder & CTAM
+# Gender & CTAM
 descr_1 <- d %>% 
-  mutate(gender = recode(gender, `0` = "Male \n (N= 291)", 
-                         `1` = "Female \n (N = 142)", .default = "Male \n (N= 291)", .missing = 'Male \n (N= 291)'),
-         comp_txt2 = recode(comp_txt2, `1` = "Using CTAM", `0` = "Not Using CTAM")) %>% 
-  ggplot(aes(x = comp_txt2, fill = gender)) +
-  geom_bar(position = position_dodge(preserve = "single"), width = .3) +
-  theme_ipsum() +
-  labs(x = "", y = "",
-       title = "Using CTAM") +
+  select(gender, comp_txt2) %>%
+  group_by(gender, comp_txt2) %>% 
+  summarise(n = n()) %>% 
+  mutate(gender = recode(gender, .missing = 0),
+         percent = if_else(comp_txt2 == 0, n/203, n/230),
+         gender = recode(gender, `0` = "Male <br/> (N= 291)", 
+                         `1` = "Female <br/> (N = 142)", .default = "Male <br/> (N= 291)", .missing = 'Male \n (N= 291)'),
+         comp_txt2 = recode(comp_txt2, `1` = "Using CTAM", 
+                            `0` = "Not Using CTAM")) %>% 
+  ggplot(aes(x = comp_txt2, y = percent, fill = gender)) +
+  geom_col(width = .3) +
+  mdthemes::as_md_theme(theme_ipsum()) +
+  labs(x = "", y = "% of sample (not) using CTAM",
+       title = "**Using CTAM**") +
+  scale_y_continuous(labels = scales::percent) +
   coord_flip() +
   scale_fill_manual(values = fig_cols) +
-  theme(plot.title = element_text(hjust = 0.5),
-        legend.position="bottom",
+  theme(legend.position="none",
         legend.title = element_blank()) 
-
 
 # Gender & type of text analysis/ software use
 descr <- d %>%
@@ -22,13 +27,13 @@ descr <- d %>%
   pivot_longer(cols = n_val_strat:n_training_needs_ind,
                names_to = "dvs") %>%
   mutate(dvs = recode(dvs,
-                      n_val_strat = "Number of Validation Strategies (H1a) \n Scale: 0 - 6",
-                      n_challenges = "Number of Reported Challenges (H1b) \n Scale: 0 - 15",
-                      n_training_needs_gen = "Amount of Training Needs in General (H2a) \n Scale: 0 - 4",
-                      n_training_needs_ind = "Individual Training Need (H2b) \n Scale: 0 - 1"),
+                      n_val_strat = "Number of Validation Strategies (H1a) <br/> Scale: 0 - 6",
+                      n_challenges = "Number of Reported Challenges (H1b) <br/> Scale: 0 - 15",
+                      n_training_needs_gen = "Amount of Training Needs in General (H2a) <br/> Scale: 0 - 4",
+                      n_training_needs_ind = "Individual Training Need (H2b) <br/> Scale: 0 - 1"),
          value = as.numeric(value),
-         gender = recode(gender, `1` = "Female \n (N=142)", `0` = "Male \n (N=291)", 
-                         .missing = "Male \n (N=291)", .default = "Male \n (N=291)")) %>%
+         gender = recode(gender, `1` = "Female <br/> (N=142)", `0` = "Male <br/> (N=291)", 
+                         .missing = "Male <br/> (N=291)", .default = "Male <br/> (N=291)")) %>%
   group_by(dvs, gender) %>%
   summarise(means = mean(value, na.rm=T),
             stdev = sd(value, na.rm=T),
@@ -40,14 +45,13 @@ descr <- d %>%
              ymin = lower, ymax = upper, color = gender)) +
   geom_point(position = position_dodge(.5), size = 3) + 
   geom_errorbar(position = position_dodge(.5), width = 0, alpha = .6) +
+  mdthemes::as_md_theme(theme_ipsum()) +
   labs(y = "", 
        x = "",
-       title = "Dependent Variables under Study") +
-  theme_ipsum() +
+       title = "**Dependent Variables under Study**") +
   scale_color_manual(values = fig_cols) +
   coord_flip() +
-  theme(plot.title = element_text(hjust = 0.5),
-        legend.position="none",
+  theme(legend.position="none",
         legend.title = element_blank()) 
 
 descr_softw <- d %>% 
@@ -62,8 +66,10 @@ descr_softw <- d %>%
                            `txt_softw` = "Specialized Text Mining Software",
                            `txt_platf` = "Generalized Text Analysis Platforms",
                            `opensource_platf` = "Open Source Coding Platforms"),
-         gender = recode(gender, `1` = "Female \n (N=142)", `0` = "Male \n (N=291)", 
-                         .missing = "Male \n (N=291)", .default = "Male \n (N=291)")) %>% 
+         gender = recode(gender, `1` = "Female <br/> (N=142)", 
+                         `0` = "Male <br/> (N=291)", 
+                         .missing = "Male <br/> (N=291)", 
+                         .default = "Male <br/> (N=291)")) %>% 
   group_by(Software, gender) %>%
   summarise(means = mean(value, na.rm=T),
             stdev = sd(value, na.rm=T),
@@ -75,14 +81,13 @@ descr_softw <- d %>%
              ymin = lower, ymax = upper, color = gender)) +
   geom_point(position = position_dodge(.5), size = 3) + 
   geom_errorbar(position = position_dodge(.5), width = 0, alpha = .6) +
+  mdthemes::as_md_theme(theme_ipsum()) +
   labs(y = "No Knowledge At All (1) - Primary Method of Research (5)", 
        x = "",
-       title = "Software Knowledge") +
-  theme_ipsum() +
+       title = "**Software Knowledge**") +
   scale_color_manual(values = fig_cols) +
   coord_flip() +
-  theme(plot.title = element_text(hjust = 0.5),
-        legend.position="none",
+  theme(legend.position="none",
         legend.title = element_blank()) 
 
 descr_method <- d %>% 
@@ -93,8 +98,10 @@ descr_method <- d %>%
                            `quali_txt` = "Qualitative Text Analysis",
                            `man_txt` = "Quantitative Manual Text Analysis",
                            `comp_txt` = "Computational Text Analysis"),
-         gender = recode(gender, `1` = "Female \n (N=142)", `0` = "Male \n (N=291)", 
-                         .missing = "Male \n (N=291)", .default = "Male \n (N=291)")) %>% 
+         gender = recode(gender, `1` = "Female <br/> (N=142)", 
+                         `0` = "Male <br/> (N=291)", 
+                         .missing = "Male <br/> (N=291)", 
+                         .default = "Male <br/> (N=291)")) %>% 
   group_by(method, gender) %>%
   summarise(means = mean(value, na.rm=T),
             stdev = sd(value, na.rm=T)) %>%
@@ -105,14 +112,14 @@ descr_method <- d %>%
              ymin = lower, ymax = upper, color = gender)) +
   geom_point(position = position_dodge(.5), size = 3) + 
   geom_errorbar(position = position_dodge(.5), width = 0, alpha = .6) +
+  mdthemes::as_md_theme(theme_ipsum()) +
   labs(y = "Never Use It (1) - Primary Method of Research (5)", 
        x = "",
-       title = "Type of Content Analysis") +
-  theme_ipsum() +
+       title = "**Type of Content Analysis**",
+       caption = "*Dots are means, wiskers represent 95% CI*") +
   scale_color_manual(values = fig_cols) +
   coord_flip() +
-  theme(plot.title = element_text(hjust = 0.5),
-        legend.position="none",
+  theme(legend.position="none",
         legend.title = element_blank()) 
 
 #Interaction with discipline
@@ -135,35 +142,45 @@ exp1 <- regression3(df)
 exp2 <- regression4(df)
 
 p_exp1 <- exp1 %>%
+  mutate(interact = factor(interact,
+                           levels = c("Discipline: Communication Science <br/> (N=127)",
+                                      "Discipline: Political Science <br/> (N=83)",
+                                      "Multi-Disciplinary <br/> (N=143)",
+                                      "Discipline: Other <br/> (N=80)"))) %>% 
   ggplot(aes(x = y, y = AME,
                      ymin = lower, ymax = upper, color = interact)) +
   geom_point(position = position_dodge(.5), size = 3) + 
   geom_errorbar(position = position_dodge(.5), width = 0, alpha = .6) +
+  mdthemes::as_md_theme(theme_ipsum()) +
   labs(x = "", 
-       y = "Marginal Effect of Identifying as Female",
-       title = "Discipline") +
-  theme_ipsum() +
+       y = "",
+       title = "**Discipline**") +
   geom_hline(yintercept = 0, size = .5, linetype = "dashed", color = "gray75") +
   coord_flip() +
   scale_color_manual(values = fig_cols) +
-  theme(plot.title = element_text(hjust = 0.5),
-        legend.position="bottom",
+  theme(legend.position="bottom",
         legend.title = element_blank()) +
   guides(color=guide_legend(nrow=4,byrow=TRUE))
 
 p_exp2 <- exp2 %>% 
+  mutate(interact = factor(interact,
+                           levels = c("PhD Student <br/> (N=38)",
+                                      "Early-Career Researcher (<5 years since PhD) <br/> (N=110)",
+                                      "Mid-Career Researcher (5-15 years since PhD) <br/> (N=205)",
+                                      "Senior Researcher (>15 years since PhD) <br/> (N=80)"))) %>% 
    ggplot(aes(x = y, y = AME,
              ymin = lower, ymax = upper, color = interact)) +
   geom_point(position = position_dodge(.5), size = 3) + 
   geom_errorbar(position = position_dodge(.5), width = 0, alpha = .6) +
+  mdthemes::as_md_theme(theme_ipsum()) +
   labs(x = "", 
-       y = "Marginal Effect of Identifying as Female",
-       title = "Career Stage") +
-  theme_ipsum() +
+       y = "",
+       title = "**Career Stage**",
+       caption = "Marginal Effect of Identifying as Female <br/> *Estimates with 95% CI (one-sided)*") +
   geom_hline(yintercept = 0, size = .5, linetype = "dashed", color = "gray75") +
   coord_flip() +
   scale_color_manual(values = fig_cols) +
-  theme(plot.title = element_text(hjust = 0.5),
-        legend.position="bottom",
-        legend.title = element_blank()) +
+  theme(legend.position="bottom",
+        legend.title = element_blank(),
+        axis.text.y = element_blank()) +
   guides(color=guide_legend(nrow=4,byrow=TRUE))

@@ -82,7 +82,7 @@ regression2 <- function(df){
         mutate(y = depVarList[i],
                lower = AME - (1.65 * SE),
                upper = AME + (1.65 * SE),
-               method = c("Not Using CTAM","Using CTAM")) %>%
+               method = c("Not Using CTAM <br/> (N=203)","Using CTAM <br/> (N=230)")) %>%
         select(AME, upper, lower, y, method)
     }
     else{
@@ -90,7 +90,7 @@ regression2 <- function(df){
         mutate(y = depVarList[i],
                lower = AME - (1.65 * SE),
                upper = AME + (1.65 * SE),
-               method = c("Not Using CTAM","Using CTAM")) %>%
+               method = c("Not Using CTAM <br/> (N=203)","Using CTAM <br/> (N=230)")) %>%
         select(AME, upper, lower, y, method)
       m <- m %>%
         add_case(tmp)
@@ -122,10 +122,10 @@ regression3 <- function(df){
         mutate(y = depVarList[i],
                lower = AME - (1.65 * SE),
                upper = AME + (1.65 * SE),
-               interact = c("Discipline: Other",
-                              "Discipline: Communication Science",
-                              "Discipline: Political Science",
-                              "Multi-Disciplinary")) %>%
+               interact = c("Discipline: Other <br/> (N=80)",
+                              "Discipline: Communication Science <br/> (N=127)",
+                              "Discipline: Political Science <br/> (N=83)",
+                              "Multi-Disciplinary <br/> (N=143)")) %>%
         select(AME, upper, lower, y, interact)
     }
     else{
@@ -133,10 +133,10 @@ regression3 <- function(df){
         mutate(y = depVarList[i],
                lower = AME - (1.65 * SE),
                upper = AME + (1.65 * SE),
-               interact = c("Discipline: Other",
-                              "Discipline: Communication Science",
-                              "Discipline: Political Science",
-                              "Multi-Disciplinary")) %>%
+               interact = c("Discipline: Other <br/> (N=80)",
+                            "Discipline: Communication Science <br/> (N=127)",
+                            "Discipline: Political Science <br/> (N=83)",
+                            "Multi-Disciplinary <br/> (N=143)")) %>%
         select(AME, upper, lower, y, interact)
       m <- m %>%
         add_case(tmp)%>%
@@ -169,10 +169,10 @@ regression4 <- function(df){
         mutate(y = depVarList[i],
                lower = AME - (1.65 * SE),
                upper = AME + (1.65 * SE),
-               interact = c("PhD Student",
-                          "Early-Career Researcher (<5 years since PhD)",
-                          "Mid-Career Researcher (5-15 years since PhD)",
-                          "Senior Researcher (>15 years since PhD)")) %>%
+               interact = c("PhD Student <br/> (N=38)",
+                          "Early-Career Researcher (<5 years since PhD) <br/> (N=110)",
+                          "Mid-Career Researcher (5-15 years since PhD) <br/> (N=205)",
+                          "Senior Researcher (>15 years since PhD) <br/> (N=80)")) %>%
         select(AME, upper, lower, y, interact)
       
     }
@@ -181,10 +181,10 @@ regression4 <- function(df){
         mutate(y = depVarList[i],
                lower = AME - (1.65 * SE),
                upper = AME + (1.65 * SE),
-               interact = c("PhD Student",
-                          "Early-Career Researcher (<5 years since PhD)",
-                          "Mid-Career Researcher (5-15 years since PhD)",
-                          "Senior Researcher (>15 years since PhD)")) %>%
+               interact = c("PhD Student <br/> (N=38)",
+                            "Early-Career Researcher (<5 years since PhD) <br/> (N=110)",
+                            "Mid-Career Researcher (5-15 years since PhD) <br/> (N=205)",
+                            "Senior Researcher (>15 years since PhD) <br/> (N=80)")) %>%
         select(AME, upper, lower, y, interact)
       
       m <- m %>%
@@ -259,7 +259,7 @@ regression6 <- function(df){
         mutate(y = depVarList[i],
                lower = AME - (1.65 * SE),
                upper = AME + (1.65 * SE),
-               method = c("Not Using CTAM","Using CTAM")) %>%
+               method = c("Not Using CTAM <br/> (N=203)","Using CTAM <br/> (N=230)")) %>%
         select(AME, upper, lower, y, method)
     }
     else{
@@ -267,7 +267,7 @@ regression6 <- function(df){
         mutate(y = depVarList[i],
                lower = AME - (1.65 * SE),
                upper = AME + (1.65 * SE),
-               method = c("Not Using CTAM","Using CTAM")) %>%
+               method = c("Not Using CTAM <br/> (N=203)","Using CTAM <br/> (N=230)")) %>%
         select(AME, upper, lower, y, method)
       m <- m %>%
         add_case(tmp)
@@ -386,7 +386,7 @@ regression8 <- function(df){
         mutate(y = depVarList[i],
                lower = AME - (1.65 * SE),
                upper = AME + (1.65 * SE),
-               method = c("Not Using CTAM","Using CTAM")) %>%
+               method = c("Not Using CTAM <br/> (N=203)","Using CTAM <br/> (N=230)")) %>%
         select(AME, upper, lower, y, method)
     }
     else{
@@ -394,7 +394,7 @@ regression8 <- function(df){
         mutate(y = depVarList[i],
                lower = AME - (1.65 * SE),
                upper = AME + (1.65 * SE),
-               method = c("Not Using CTAM","Using CTAM")) %>%
+               method = c("Not Using CTAM <br/> (N=203)","Using CTAM <br/> (N=230)")) %>%
         select(AME, upper, lower, y, method)
       m <- m %>%
         add_case(tmp)
@@ -469,7 +469,7 @@ regression10 <- function(df){
         mutate(y = depVarList[i],
                lower = AME - (1.65 * SE),
                upper = AME + (1.65 * SE),
-               method = c("Not Using CTAM","Using CTAM")) %>%
+               method = c("Not Using CTAM <br/> (N=203)","Using CTAM <br/> (N=230)")) %>%
         select(AME, upper, lower, y, method)
     }
     else{
@@ -477,7 +477,7 @@ regression10 <- function(df){
         mutate(y = depVarList[i],
                lower = AME - (1.65 * SE),
                upper = AME + (1.65 * SE),
-               method = c("Not Using CTAM","Using CTAM")) %>%
+               method = c("Not Using CTAM <br/> (N=203)","Using CTAM <br/> (N=230)")) %>%
         select(AME, upper, lower, y, method)
       m <- m %>%
         add_case(tmp)
@@ -563,7 +563,7 @@ theme_ipsum <- function(base_family="Arial Narrow", base_size = 12,
   ret <- ret + theme(strip.text=element_text(hjust=0, size=strip_text_size,
                                              face=strip_text_face, family=strip_text_family))
   ret <- ret + theme(panel.spacing=grid::unit(2, "lines"))
-  ret <- ret + theme(plot.title=element_text(hjust=0, size=plot_title_size,
+  ret <- ret + theme(plot.title=element_text(hjust=0.5, size=plot_title_size,
                                              margin=margin(b=plot_title_margin),
                                              family=plot_title_family, face=plot_title_face))
   ret <- ret + theme(plot.subtitle=element_text(hjust=0, size=subtitle_size,

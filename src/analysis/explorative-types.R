@@ -12,7 +12,7 @@ m_split <- regression6(d)
 
 m <- m %>% 
   select(estimate, lower, upper, y = id, term) %>%
-  mutate(term = recode(term, `gender` = "Fulll Sample"))
+  mutate(term = recode(term, `gender` = "Fulll Sample <br/> (N=433)"))
 m_split <- m_split %>% 
   select(estimate = AME, lower, upper, y, term = method)
 
@@ -28,15 +28,14 @@ pv <- m %>%
              ymin = lower, ymax = upper, color = term)) +
   geom_point(position = position_dodge(.5), size = 3) + 
   geom_errorbar(position = position_dodge(.5), width = 0, alpha = .6) +
+  mdthemes::as_md_theme(theme_ipsum()) +
   labs(x = "", 
-       y = "Effect of Identifying as Female on Dependent Variable",
-       title = "Validation") +
-  theme_ipsum() +
+       y = "",
+       title = "**Validation (H1a)**") +
   geom_hline(yintercept = 0, size = .5, linetype = "dashed", color = "gray75") +
   coord_flip() +
   scale_color_manual(values = fig_cols) +
-  theme(plot.title = element_text(hjust = 0.5),
-        legend.position="bottom",
+  theme(legend.position="bottom",
         legend.title = element_blank()) 
 
 ## Seperate indicators: Challengess
@@ -53,7 +52,7 @@ m_split <- regression8(d)
 
 m <- m %>% 
   select(estimate, lower, upper, y = id, term) %>%
-  mutate(term = recode(term, `gender` = "Fulll Sample"))
+  mutate(term = recode(term, `gender` = "Fulll Sample <br/> (N=433)"))
 m_split <- m_split %>% 
   select(estimate = AME, lower, upper, y, term = method)
 
@@ -79,15 +78,16 @@ pc <- m %>%
              ymin = lower, ymax = upper, color = term)) +
   geom_point(position = position_dodge(.5), size = 3) + 
   geom_errorbar(position = position_dodge(.5), width = 0, alpha = .6) +
+  mdthemes::as_md_theme(theme_ipsum()) +
   labs(x = "", 
-       y = "Effect of Identifying as Female on Dependent Variable",
-       title = "Challenges") +
-  theme_ipsum() +
+       y = "",
+       title = "**Challenges (H1b)**",
+       caption = "Effect of Identifying as Female on Dependent Variable <br/> *Estimates with 95% CI (one-sided)*") +
+  
   geom_hline(yintercept = 0, size = .5, linetype = "dashed", color = "gray75") +
   coord_flip() +
   scale_color_manual(values = fig_cols) +
-  theme(plot.title = element_text(hjust = 0.5),
-        legend.position="none",
+  theme(legend.position="none",
         legend.title = element_blank()) 
 
 ## Seperate indicators: Training
@@ -104,7 +104,7 @@ m_split <- regression10(d)
 
 m <- m %>% 
   select(estimate, lower, upper, y = id, term) %>%
-  mutate(term = recode(term, `gender` = "Fulll Sample"))
+  mutate(term = recode(term, `gender` = "Fulll Sample <br/> (N=433)"))
 m_split <- m_split %>% 
   select(estimate = AME, lower, upper, y, term = method)
 
@@ -119,13 +119,12 @@ pt <- m %>%
              ymin = lower, ymax = upper, color = term)) +
   geom_point(position = position_dodge(.5), size = 3) + 
   geom_errorbar(position = position_dodge(.5), width = 0, alpha = .6) +
+  mdthemes::as_md_theme(theme_ipsum()) +
   labs(x = "", 
-       y = "Effect of Identifying as Female on Dependent Variable",
-       title = "Training") +
-  theme_ipsum() +
+       y = "",
+       title = "**Training (H2a)**") +
   geom_hline(yintercept = 0, size = .5, linetype = "dashed", color = "gray75") +
   coord_flip() +
   scale_color_manual(values = fig_cols) +
-  theme(plot.title = element_text(hjust = 0.5),
-        legend.position="none",
+  theme(legend.position="none",
         legend.title = element_blank()) 

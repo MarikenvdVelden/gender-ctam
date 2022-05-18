@@ -38,15 +38,15 @@ header-includes:
    - \newtheorem{hypo}{Hypothesis}
 biblio-style: apsr
 title: "Is Mathilda Playing it Safe? Gender in Computational Text Analysis Methods"
-thanks: "Replication files are available on the author's Github account (https://anonymous.4open.science/r/gender-ctam-CBA3/README.md). **Current version**: `r format(Sys.time(), '%B %d, %Y')`; **Corresponding author**: Mariken A.C.G. van der Velden"
+thanks: " **Corresponding author**: Mariken A.C.G. van der Velden. Replication files are available on the corresponding author's Github account (https://anonymous.4open.science/r/gender-ctam-CBA3/README.md). **Current version**: `r format(Sys.time(), '%B %d, %Y')`; **Author contributions**:  data collection: MACGvdV; FL, CB & MS; data analysis: MACGvdV; writing of the paper: AD & MACGvdV"
 author:
+- name: Mariken A.C.G. van der Velden
+  affiliation: Vrije Universiteit Amsterdam   
 - name: Alona Dolinsky
   affiliation: University College Dublin
-- name: Mariken A.C.G. van der Velden
-  affiliation: Vrije Universiteit Amsterdam
 anonymous: FALSE
 abstract: "The editors of top-journals in political science have investigated the role of the review process finding no indication for gender bias in the editorial process. They suggest that the submission pools are distorted by gender. We test some pathways that could distort the submission pool: a) playing it safe due to the gender perception gap, and b) the Mathilda effect. Papers using Computational Text Analysis Methods are more likely to be published in journals with a 'masculinized' perception gap. When women are aiming for these journals, they might 'play it safe' by conducting more validation checks than their male colleagues. Moreover, embracing the Mathilda effect – i.e. the systematic under-recognition of female scientists – women scholars are more likely to indicate that a) there are important training needs in more areas; and b) they themselves need (further) training in computational methods and use these reasons not to publish employing these methods. We test these claims using a ) an unique content analysis of research articles published in the top 20 journals in communication science, political science, sociology and psychology between 2016 and 2020, identifying all 854 articles that involved some form of quantitative textual analysis; and b) an expert survey with all authors of quantitative text analytic research identified via said content analysis, which inquired about researchers’ considerations and concerns in the application of computational text analytic strategies."
-keywords: "Experiment, Populist Attitudes"
+keywords: "Computational Text Analyses Methods, Gender, Expert Survey"
 geometry: margin=1in
 mainfont: cochineal
 fontsize: 11pt
@@ -63,6 +63,8 @@ sansitup: FALSE
 knitr::opts_chunk$set(echo = FALSE,
                       message=FALSE, warning=FALSE)
 options(kableExtra.latex.load_packages = FALSE)
+options(scipen = 1, digits = 2)
+knitr::opts_chunk$set(fig.pos = "h", out.extra = "")
 
 # Uncomment below if you want code captions
 # oldSource <- knitr::knit_hooks$get("source")
@@ -72,11 +74,16 @@ options(kableExtra.latex.load_packages = FALSE)
 #   ifelse(!is.null(options$ref), paste0(x, "\\label{", options$ref,"}"), x)
 # })
 # Add `chunkcaption: TRUE` to YAML as well.
+
+
+### WORD COUNT IN TERMINAL
+#pip3 install markdown-word-count
+#mwc Dropbox/Papers/Text_Infrastructure_Project/gender-ctam/report/draft.Rmd
 ```
 
 # Introduction
 
-Motivation: why do we care
+[\textcolor{red}{Short motivation copied from Pre-Analysis Plan}]
 
 @gatto2020selecting demonstrates that while women cover significantly fewer methods courses in their doctoral training, when they do participate in methods training, they, however, show similar levels of method employment to their male colleagues.
 Yet, @teele_thelen_2017 demonstrate that women are less likely to publish studies  using quantitative and computational methods (see @maliniak_powers_walter_2013 for a similar argument in International Relations).
@@ -84,8 +91,8 @@ Yet, @teele_thelen_2017 demonstrate that women are less likely to publish studie
 The editors of top-journals in politicial science have investigated the role of the review process finding no indication for gender bias in the editorial process [@breuning_gross_feinberg_martinez_sharma_ishiyama_2018;@koenig_ropers_2018;@brown_samuels_2018].
 The authors all suggest that the submission pools are distorted by gender.
 
-We test X pathways that could distort the submission pool: a) playing it safe due to the gender perception gap, and b) the Mathilda effect.
-Papers using CTAM are more likely to be published in journals with a _"masculinized" perception gap_.
+We test two pathways that could distort the submission pool: a) playing it safe due to the gender perception gap, and b) the Mathilda effect.
+Papers using computational text analysis methods (CTAM) are more likely to be published in journals with a _"masculinized" perception gap_.
 When women are aiming for these journals, it could be that they ``play it safe'' by conducting more validation checks than their men.
 Moreover, embracing of the _Mathilda effect_ [@rossiter1993matthew] -- i.e. the systematic underrecognition of female scientists -- women scholars are more likely to indicate that a) there are important training needs in more areas; and b) they themselves need (further) training in computational methods and use these reasons not to publish employing these methods.
 
@@ -98,42 +105,77 @@ Moreover, embracing of the _Mathilda effect_ [@rossiter1993matthew] -- i.e. the 
 **Mathilda effect hypothesis** (_H2b_):  Women scholars are more likely to indicate that they themselves require (further advanced) training than men scholars.
 
 
-# Data \& Results
-We have condected an expert survey, inviting all scholars published a scientific article between January 2016 and September 2020 (`N = 45,437`).
-Using a keyword search on the Web of Science, we then identified a total of 7,296 _potentially_ relevant articles whose abstracts referred to some kind of textual contents or text analytic procedures.
-We then accessed the full text of these articles to determine whether the presented research included any form of quantitative textual analysis. 
+# Is Mathilda Playing it Safe?
+We have condected an expert survey, inviting all scholars who had published a scientific article using quantitative text analysis between January 2016 and September 2020  in one of the 20 highest ranked journals in Communications, Political Science, Sociology, and Psychology [for details, see @baden2021three].
 Quantitative textual analysis was defined broadly to include any form of processing natural language that identified specific kinds of textual contents with the purpose of classification and quantitative analysis.
-Analyses that relied solely on metadata or pre-existing classifications were excluded, as were investigations accessing only formal properties of the sampled texts (e.g., length).
-We included analyses of multi-modal media (e.g., posters, television) as long as textual contents were informative toward classification.
-Purely methodological contributions discussing specific potentials or limitations of available methods were excluded, unless they included applied demonstrations wherein actual textual data was processed.
-Articles were considered relevant as soon as they used any form of quantitative textual analysis, even if it was used merely in an auxiliary capacity (e.g., a content analysis to identify frames to be used in an experiment; sentiment analyses of open-ended survey responses).
-This screening yielded a total of `N = 854` articles, for which the authors were looked up.
-This yielded us with 1,653 identifiable and working email-addresses. 
-
+Using a keyword search on the Web of Science, we identified a total of `7,296` _potentially_ relevant articles out of the `45,437` published articles, whose abstract suggested any kind of textual content or test analytic procedures. 
+Articles were considered relevant as soon as they used any form of quantitative textual analysis, even if it was used merely in an auxiliary capacity (e.g., a content analysis to identify frames to be used in an experiment; sentiment analyses of open-ended survey responses).[^1]
+This screening yielded a total of `854` articles, for which the authors were looked up.
+This gave us `1,653` identifiable and working email-addresses. 
 The experts have been invited to the questionnaire on March 4th of 2021, and received two reminders, each approximately a week after our last message (respectively on March 11th and March 16th of 2021).
-This yielded a responses of 433 responses (i.e. response rate of `25%`).
+This yielded a responses of `433` responses (i.e. response rate of `25%`).
 The study has been approved by the Research Ethics Review Committee of the [_Vrije Universiteit Amsterdam_](#), [_Hebrew University Jerusalem Isreal_](#), and [_University College Dublin_](#).
 
+[^1]: Analyses that relied solely on metadata or pre-existing classification were excluded, as were investigations accessing only formal properties of the sampled texts (e.g., length). We included analyses of multi-modal media (e.g., posters, television) as long as the textual contents were informative toward classification. Purely methodological contributions discussing specific potentials or limitations of available methods were excluded, unless they included applied demonstrations wherein actual textual data were processed. 
 
-
-```{r data-descrip, out.width = "100%", fig.align = 'center', fig.cap = "\\label{fig:descr}Variables under Study"}
+```{r data-descrip, out.width = "100%", fig.align = 'center', fig.cap = "\\label{fig:descr}Gender Break-Down in Variables under Study"}
 knitr::include_graphics(here::here("report/figures", "explorative-1.png"))
 ```
 
-```{r pre-reg-h, out.width = "100%", fig.align = 'center', fig.cap = "\\label{fig:pre-reg-h}Results Pre-Registered Hypotheses"}
+To survey the field on different aspects of potential 'playing it safe' strategies when it comes to CTAM, we have asked participants to list how many of five pre-defined validation strategies[^2] they use, as well as if they use other strategies (open answer posibility). 
+Additionally, we asked participants to what extent 14 pre-defined reasons are challenges for them _not_ to use CTAM.[^3]
+Answer options where `no challenge`, `minor challenge`, `major challenge`.
+In the analyses, we grouped minor and major challenges together and compared them to no challenges reported.
+To gauge a possible 'Mathilda effect', we have asked our experts to list if the field in general needs more training possibilities when it comes to data and open access tools, programming and software skills, theory and concepts, research integrity and ethics, or other training skills -- for each option there was the possiblity to specify what was needed. 
+Moreover, we have also asked the participants if they themselves need more training. 
+In all our analyses, we control for whether or not the participant uses CTAM themselves, the types of content analyses they use in their work, and their pre-existing knowledge of statistical software.
+Figure \ref{fig:descr} demonstrates the gender break-down in our sample for the dependent variables as well as the control variables.
+While the descriptive statistics (average and standard deviation) do not show gender differences, we do see in the top-right panel that men in our sample are over-represented. Yet where we have roughly the same amount of women scholars using CTAM as not using CTAM (i.e. using quantitative or qualitative manual content analysis), our sample has more men scholars using CTAM than not using CTAM.
+
+[^2]: The pre-defined validation strategies are: 1) _I check the documentation of the software developer_; 2) _I check whether findings are plausible and interpretable_; 3) _I compare machine-made classifications (i.e. coded outputs) against manually coded/given standards_; 4) _I check whether the classification rules/criteria are valid (e.g., check for meaningful indicators in adictionary)_; and 5) _I evalute how well the algorithmic procedures match my concept of interest (e.g., checking adequacy of bag-of-words assumption)_.
+
+[^3]: The pre-defined challenges are: 1) _Time/effort required (e.g. technical requirements, experience)_; 2) _Funding required (e.g., for training, fees)_; 3) _Availability of required training in computational methods_; 4) _Limited methodological guidance/documentation of tools_; 5) _Level of instruction and materials higher than needed_; 6) _Level of instruction/materials lower than needed_; 7) _Availability of suitable computational tools for certain languages_; 8) _Comparability of computational tools in different languages_; 9) _Issues concerning measurement validity/limited nuance_; 10) _Loss of manual contact with the material_; 11) _Reviewers'/editors'' skepticism toward computational methods among_; 12) _Peers' skepticism toward computational methods_; 13) _I am skeptical toward computational methods myself_; and 14) _Other challenges: (Open ended)_.
+
+
+To test our pre-registered hypotheses, we ran a OLS regression and visualize the results in Figure \ref{fig:pre-reg-h} and \ref{fig:dv-types} with an one-tailed $\alpha$ of `0.05`.
+We present the regression tables in Appendix **XX**. 
+Looking at the variables measuring 'playing it safe' strategies, i.e. reporting number of validation strategies and number of challenges, Figure \ref{fig:pre-reg-h} demonstrates that women scholars do not report more validation strategies than men. 
+While not statistically significant for the full sample as well as for the split sample using CTAM, we see the opposite: Women scholars report to use less validation strategies.
+In the top-left panel of Figure \ref{fig:dv-types}, we inspect the gender differences in the type of validation strategies reported. 
+This shows that the only strategy women scholars are statistically significantly less likely to report compared to men scholars is checking the documentation of the software developer. 
+Women scholars are more likely to report to use the validation strategies of checking algortihmic procedures and checking against the gold standard.
+This is only borderline non-significant, most likely due to the small number of women in our sample.
+For the other playing it safe strategy -- i.e. number of challenges reported -- Figure \ref{fig:pre-reg-h} demonstrates that women scholars are more likely to report challenges, but this effect is not statistically significant.
+Breaking down the challenges in the right-hand panel of Figure \ref{fig:dv-types} do demonstrate interesting gender patterns.
+Women are more likely to report time/effort, funding, and training needs as well as limitied methodological guidance of the tools as a challenge to not using CTAM.
+Men scholars, however, are more taken back by peers' and editors' skepticism towards the method. 
+
+```{r pre-reg-h, out.width = "80%", fig.align = 'center', fig.cap = "\\label{fig:pre-reg-h}Effect of Being Female on Reported Validation Strategies, Challenges, and Training Needs"}
 knitr::include_graphics(here::here("report/figures", "h-pre-reg-1.png"))
 ```
 
-```{r types-dv, out.width = "100%", fig.align = 'center', fig.cap = "\\label{fig:explor}Results Explorative Analyses"}
+Investigating a possible Mathilda effect, Figure \ref{fig:pre-reg-h} demonstrates that women scholars are more likely to report more training needs, but this effect is not statistically significant.
+Looking at the type of training needs in the bottom-left panel of Figure \ref{fig:dv-types}, we see that the insignificance of the aggregated training needs stems from women using CTAM and using manual content analysis reporting opposite needs:
+Women in CTAM, report general needs for training in research integrity and ethics as well as for training in concepts, whereas women not using CTAM report general training needs for programming and software skills as well as for data and open access tools.
+When it comes to individual training needs, women scholars using CTAM do report they need more training compared to men scholars using CTAM. 
+
+```{r types-dv, out.width = "100%", fig.align = 'center', fig.cap = "\\label{fig:dv-types}Effect of Being Female on Reported Type of Validation Strategies, Challenges, and Training Needs"}
 knitr::include_graphics(here::here("report/figures", "types-dv-1.png"))
 ```
 
-```{r explor-results, out.width = "100%", fig.align = 'center', fig.cap = "\\label{fig:explor}Results Explorative Analyses"}
+In addition to the pre-registered effects, we have explored the interaction with discipline and stage of the career of scholars, as demonstrated in Figure \ref{fig:explor}.
+The left-hand panel of Figure \ref{fig:explor} shows that compared to communication  and political science, the other disciplines (grouping sociology, psychology, and economy), where computational methods were less common, we see support for both our playing it safe and Mathilda effect hypotheses. 
+This can be optimistically interpreted: When the CTAM is more prevalent in the discipline, women scholars catch up quickly. 
+The right-hand panel of Figure \ref{fig:explor} demonstrates that none of the reported results are driven by a particular career stage of scholars.
+
+```{r explor-results, out.width = "100%", fig.align = 'center', fig.cap = "\\label{fig:explor}Marginal Effect of Being Female on Reported Validation Strategies, Challenges, and Training Needs"}
 knitr::include_graphics(here::here("report/figures", "explorative-2.png"))
 ```
 
+**ADDITIONAL CHECK: ARE WOMEN LESS LIKELY TO BE FIRST AUTHOR?**
 
 # Conclusion
+[\textcolor{red}{TBA}]
 
 
 \newpage
