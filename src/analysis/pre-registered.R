@@ -18,7 +18,7 @@ m_split <- regression2(d)
 
 m1 <- m1 %>% 
   select(estimate, lower, upper, y = id, term) %>%
-  mutate(term = recode(term, `gender` = "Fulll Sample"))
+  mutate(term = recode(term, `gender` = "Fulll Sample <br/> (N=433)"))
 m_split <- m_split %>% 
   select(estimate = AME, lower, upper, y, term = method)
 
@@ -33,12 +33,12 @@ p <- m1 %>%
              ymin = lower, ymax = upper, color = term)) +
   geom_point(position = position_dodge(.5), size = 3) + 
   geom_errorbar(position = position_dodge(.5), width = 0, alpha = .6) +
+  mdthemes::as_md_theme(theme_ipsum()) +
   labs(x = "", 
-       y = "Effect of Identifying as Female on Dependent Variable") +
-  theme_ipsum() +
+       y = "Effect of Identifying as Female on Dependent Variable",
+       caption = "*Estimates with 95% CI (one-sided)*") +
   geom_hline(yintercept = 0, size = .5, linetype = "dashed", color = "gray75") +
   coord_flip() +
   scale_color_manual(values = fig_cols) +
-  theme(plot.title = element_text(hjust = 0.5),
-        legend.position="bottom",
+  theme(legend.position="bottom",
         legend.title = element_blank()) 
