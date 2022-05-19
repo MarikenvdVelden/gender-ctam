@@ -52,4 +52,5 @@ packrat/src/
 data/tmp
 data/raw-private
 ._DS_Store
-
+.DS_Store
+.Rprofile
