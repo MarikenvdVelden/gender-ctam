@@ -32,23 +32,6 @@ source(here::here("src/lib/functions.R"))
 load(here("data/intermediate/clean_data.RData"))
 ```
 
-Next, we automatically extract a `.md` file for the online appendix, as well as a  latex table for the manuscript. 
-We are using jinja2 template [src/analysis/table_descriptives.tex.j2](table.tex.j2) which is called with a json string containing the data.
-To replicate, make sure `env/bin/pip install -U j2cli` is installed via your command line.
-
-```{r "Table with Descriptives"}
-source(here("src/analysis/descriptive-information-overview.R"))
-table2 <- knitr::kable(descr, digits=2)
-fn <- here("report/figures/table_descriptives.tex")
-cat("# Table: Descriptive Information of Variables under Study \n\n", file=fn)
-cat(table2, file=fn, sep="\n", append=T)
-
-methodnames <- setNames(as.list(descr$Variables), descr$Variables)
-table <- purrr::map(descr, .f= ".") 
-#render_j2(here("src/analysis/table_descriptives.tex.j2"), here("report/figures/table_descriptives.tex"),
-#          data=list(data=table, methods=methodnames))
-rm(descr, methodnames, table, fn, table2)
-```
 
 ## Pre-Registered Hypotheses 
 ```{r "h-pre-reg", fig.align="center", fig.height=10, fig.width=14}
@@ -82,4 +65,10 @@ source(here("src/analysis/explorative-types.R"))
 ((pv / pt + plot_layout(guides = 'auto')) | pc) +
   plot_layout(guides = "collect") & theme(legend.position = "bottom")
   
+```
+
+# Replication with Second Data set
+
+```{r "replication-data, eval = F}
+dr <- read_csv(here("data/raw-private/training_needs_survey_wp2&9.csv"))
 ```

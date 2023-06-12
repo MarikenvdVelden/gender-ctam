@@ -37,26 +37,29 @@ header-includes:
    - \usepackage{amsthm}
    - \newtheorem{hypo}{Hypothesis}
 biblio-style: apsr
-title: "Is Mathilda Playing it Safe? Gender in Computational Text Analysis Methods"
-thanks: " **Corresponding author**: Mariken A.C.G. van der Velden. Replication files are available on the corresponding author's Github account (https://anonymous.4open.science/r/gender-ctam-CBA3/README.md). **Current version**: `r format(Sys.time(), '%B %d, %Y')`; **Author contributions**:  data collection: MACGvdV; FL, CB & MS; data analysis: MACGvdV; writing of the paper: AD & MACGvdV"
+title: "Is Matilda Playing it Safe? Gender in Computational Text Analysis Methods"
+thanks: " **Corresponding author**: Mariken A.C.G. van der Velden. Replication files are available on the corresponding author's Github account (https://anonymous.4open.science/r/gender-ctam-CBA3/README.md). **Current version**: `r format(Sys.time(), '%B %d, %Y')`; **Author contributions**:  data collection: MACGvdV; data analysis: MACGvdV; writing of the paper: AOD & MACGvdV"
 author:
 - name: Mariken A.C.G. van der Velden
   affiliation: Vrije Universiteit Amsterdam   
-- name: Alona Dolinsky
+- name: Alona O. Dolinsky
   affiliation: University College Dublin
-anonymous: FALSE
-abstract: "The editors of top-journals in political science have investigated the role of the review process finding no indication for gender bias in the editorial process. They suggest that the submission pools are distorted by gender. We test some pathways that could distort the submission pool: a) playing it safe due to the gender perception gap, and b) the Mathilda effect. Papers using Computational Text Analysis Methods are more likely to be published in journals with a 'masculinized' perception gap. When women are aiming for these journals, they might 'play it safe' by conducting more validation checks than their male colleagues. Moreover, embracing the Mathilda effect – i.e. the systematic under-recognition of female scientists – women scholars are more likely to indicate that a) there are important training needs in more areas; and b) they themselves need (further) training in computational methods and use these reasons not to publish employing these methods. We test these claims using a ) an unique content analysis of research articles published in the top 20 journals in communication science, political science, sociology and psychology between 2016 and 2020, identifying all 854 articles that involved some form of quantitative textual analysis; and b) an expert survey with all authors of quantitative text analytic research identified via said content analysis, which inquired about researchers’ considerations and concerns in the application of computational text analytic strategies."
+anonymous: TRUE
+abstract: "Numerous studies document the gender gap in published articles in political science journals, observing systematic imbalances in the submission pool which result in a distored publication pattern. In this study we test some pathways that may explain the distorted submission pool: a) playing it safe due to the gender perception gap, and b) the Matilda effect, focusing on papers using Computational Text Analysis methods. Papers using Computational Text Analysis Methods are more likely to be published in journals with a 'masculinized' perception gap. When women are aiming for these journals, they might 'play it safe' by conducting more validation checks than their male colleagues. Moreover, embracing the Matilda effect – i.e. the systematic under-recognition of female scientists – women scholars are more likely to indicate that a) there are important training needs in more areas; and b) they themselves need (further) training in computational methods and use these reasons not to publish papers employing these methods. We test these claims using a) a unique content analysis of research articles published in the top 20 journals in communication science, political science, sociology and psychology between 2016 and 2020, identifying all 854 articles that involved some form of quantitative textual analysis; and b) a pre-registered expert survey of all authors of quantitative text analytic research identified via said content analysis, which inquired about researchers’ considerations and concerns in the application of computational text analytic strategies."
 keywords: "Computational Text Analyses Methods, Gender, Expert Survey"
 geometry: margin=1in
 mainfont: cochineal
-fontsize: 11pt
+fontsize: 12pt
 params:
   anonymous: ""
   doublespacing: ""
-doublespacing: TRUE
+oneandhalfspacing: TRUE
 endnote: no
 pandocparas: TRUE
 sansitup: FALSE
+editor_options: 
+  markdown: 
+    wrap: sentence
 ---
 
 ```{r setup, include=FALSE}
@@ -83,102 +86,180 @@ knitr::opts_chunk$set(fig.pos = "h", out.extra = "")
 
 # Introduction
 
-[\textcolor{red}{Short motivation copied from Pre-Analysis Plan}]
+The gender gap in the sciences and the social sciences has been debated for decades [@hengel2017publishing; @Huang_et_al_2020; @monroe_ozyurt_wrigley_alexander_2008; @Welborn_McKenzie_1989]. Numerous studies have documented gender disparities in multiple areas of academia including publications and citations of both journal articles and books [@Young_1995; @teele_thelen_2017; @samuels_teele_2021; @ferber_gender_2011], collaborative projects and coauthorships [@evans_moulder_2011; @koenig_ropers_2018], teaching evaluations [@macnell_2015; @Mengel_et_al_2018], letters of recommendation [@Madera_et_al_2019], networking, socialization and mentorship [@barnes_beaulieu_2017; @alter_clipperton_schraudenbach_rozier_2020; @sarkees_breuning_2010], promotion rates [@maliniak_etal_2008; @key_sumner_2019; @kim_grofman_2019], status recognition [@alter_clipperton_schraudenbach_rozier_2020; @tatalovich_frendries_2019], grant awards [@ma_etal_2019; @oliveira_etal_2019] and more.
+Despite efforts to address these issues, such gender disparities persist across disciplines [@alter_clipperton_schraudenbach_rozier_2020; @dion_sumner_mitchell_2018; @teele_thelen_2017; @Weisshaar_2017].
+To address these disparities, academic organizations establish task forces.
+For example, the American Political Science Association's Task Force on Systematic Inequalities in the Discipline published a comprehensive report on January 2022 on the multiple challenges affecting women in the field, discussing many of the above areas of disparity.^[The full report is available here: <https://connect.apsanet.org/sidtaskforce/>]
 
-@gatto2020selecting demonstrates that while women cover significantly fewer methods courses in their doctoral training, when they do participate in methods training, they, however, show similar levels of method employment to their male colleagues.
-Yet, @teele_thelen_2017 demonstrate that women are less likely to publish studies  using quantitative and computational methods (see @maliniak_powers_walter_2013 for a similar argument in International Relations).
-@brown_horiuchi_htun_samuels_2020 demonstrate that the _gender submission gap_ is accompanied by a _gender perception gap_: Women report that they are more likely to submit to and get published in some journals, whereas men report as such with regard to other journals. Importantly, these gaps are observed even among scholars with the same methodological (i.e., quantitative or qualitative) approach.
-The editors of top-journals in politicial science have investigated the role of the review process finding no indication for gender bias in the editorial process [@breuning_gross_feinberg_martinez_sharma_ishiyama_2018;@koenig_ropers_2018;@brown_samuels_2018].
-The authors all suggest that the submission pools are distorted by gender.
+Among the various challenges affecting women in the discipline, of particular importance is the gender gap in publication of academic work. Publications are a key element of the profession, serving as both a means to disseminate knowledge and as metric by which productivity and accomplishments are measured. This metric is then used as a basis for promotion and advancement in the field, making it central for the development of a successful career in academia. Thus, the gender gap in publication of academic work has been the focus of numerous studies over the years, examining a variety of possible explanations for the observed skewed pattern [@breuning_gross_feinberg_martinez_sharma_ishiyama_2018; @brown_samuels_2018; @djupe_smith_sokhey_2019; @hill_hurley_2022; @koenig_ropers_2018; @teele_thelen_2017]. Among the various findings in these studies, a common suggestion is that the gender gap in publications can be explained by a distorted submission pool—men publish more papers "simply" because they submit more manuscripts. But why is the submission pool distorted by gender? Some suggest that this is due to skewed employment patterns, women scholars more likely to be employed at teaching-focused institutions [@breuning_gross_feinberg_martinez_sharma_ishiyama_2018], or due to other factors like area of study or employed methodology [@hancock_women_2013; @key_sumner_2019]. Others suggest a perception gap affecting submissions-some journals are viewed as more "masculinized", resulting in men being more likely to submit their work for consideration at these journals compared  to women [@brown_horiuchi_htun_samuels_2020]. Other still speculate that the gender gap in submissions results from differences in quality standards and self-assessment [@brown_horiuchi_htun_samuels_2020; @koenig_ropers_2018] as well as differences in taught publication strategies through skewed socialization experiences [@brown_horiuchi_htun_samuels_2020]. 
 
-We test two pathways that could distort the submission pool: a) playing it safe due to the gender perception gap, and b) the Mathilda effect.
-Papers using computational text analysis methods (CTAM) are more likely to be published in journals with a _"masculinized" perception gap_.
-When women are aiming for these journals, it could be that they ``play it safe'' by conducting more validation checks than their men.
-Moreover, embracing of the _Mathilda effect_ [@rossiter1993matthew] -- i.e. the systematic underrecognition of female scientists -- women scholars are more likely to indicate that a) there are important training needs in more areas; and b) they themselves need (further) training in computational methods and use these reasons not to publish employing these methods.
+Focusing on the study area of Computational Text Analysis Methods (CTAM), which has grown significantly in the social sciences in recent years, we test two possible pathways that may explain the distort submission pool: a) playing it safe due to the gender perception gap, and b) the Matilda effect. Papers using CTAM are more likely to be published in journals with a 'masculinized' perception gap. When women are aiming for these journals, they might 'play it safe' by conducting more validation checks than their male colleagues. Moreover, embracing the Matilda effect – i.e. the systematic under-recognition of female scientists – women scholars are more likely to indicate that a) there are important training needs in more areas; and b) they themselves need (further) training in computational methods and use these reasons not to publish papers employing these methods. We test these claims using a) a unique content analysis of research articles published in the top 20 journals in communication science, political science, sociology and psychology between 2016 and 2020, identifying all 854 articles that involved some form of quantitative textual analysis; and b) a pre-registered expert survey of all authors of quantitative text analytic research identified via said content analysis, which inquired about researchers’ considerations and concerns in the application of computational text analytic strategies.^[Replication files are available on the corresponding author's Github account: https://anonymous.4open.science/r/gender-ctam-CBA3/README.md]
 
-**Play it Safe hypothesis** (_H1a_):  Women scholars are more likely to play it safe and indicate more validation strategies than men scholars.
+Our findings our slightly optimistic: In social science disciplines where CTAM has become more prevalent, women scholars catch up quickly and we do not see a "play it safe" strategy: Women do not report to conduct much more validation strategies when using text analyses methods.
+We do see that in disciplines where CTAM is less of a mainstream method, this strategy is at place though.
+At the same, our findings show various indications of the Matilda effect at play: Women scholars perceive that a lot more effort is required for women to succeed in the profession.
+This has important downstream consequences for women scholars in their careers: Lower output, out-selecting of grant proposals and team work.
+To this end, it is important that infrastructure of both training and data acknowledges these gender disparities as well as actively take action, as we see that especially the playing it safe mechanism can be alleviated.
+This in turn potentially mitigates the Matilda effect too.
 
-**Play it Safe hypothesis** (_H1b_): Women scholars are more likely to play it safe and indicate more challenges as reasons **not** to use CTAM than men scholars.
+# Gender distortion in the submission pools: A matter of playing it safe?
 
-**Mathilda effect hypothesis** (_H2a_):  Women scholars are more likely to indicate a higher number of important training needs than men scholars.
+Numerous studies have examined the gender gap in academic publications, finding both positive and negative associations with various proposed explanations. @breuning_gross_feinberg_martinez_sharma_ishiyama_2018, for example, found no supporting evidence for the proposition that women scholars publish less than their male colleagues because of differences in areas of study. Similarly, @koenig_ropers_2018 did not find support for the proposition that women scholars publish less than their male colleagues because of differences in used research methods, although @teele_thelen_2017 and @brown_samuels_2018 did observe such a pattern.
+Further still, @koenig_ropers_2018 and @djupe_smith_sokhey_2019 found no evidence that work by women is rejected more frequently than that of men relative to their submission rates, and @breuning_gross_feinberg_martinez_sharma_ishiyama_2018, @koenig_ropers_2018, and @brown_samuels_2018 found no evidence of a gender bias in the editorial process itself. While these explanations can seemingly be ruled out as causes of the gender gap in publications, other explanations do find support. @breuning_gross_feinberg_martinez_sharma_ishiyama_2018, for example, found evidence that journal editors exhibit a preference for authors in research-intensive universities indicating that while some bias exists in the editorial process itself, it is not explicitly gender-based.
+The most notable finding across these studies is a common suggestion that fundamentally, the gender gap in publications can be explained by a distorted submission pool---that men publish more papers "simply" because they submit more manuscripts [@koenig_ropers_2018; @brown_samuels_2018; @breuning_gross_feinberg_martinez_sharma_ishiyama_2018].
 
-**Mathilda effect hypothesis** (_H2b_):  Women scholars are more likely to indicate that they themselves require (further advanced) training than men scholars.
+So what might explain the gender distortion in the submission pools?
+Few studies offer systematic evidence with which to answer this question, but the literature does offer several suggestive explanations. @breuning_gross_feinberg_martinez_sharma_ishiyama_2018, for example, speculate that women scholars submit fewer manuscripts for review because they are more likely to be employed at teaching-focused institutions where less value is put on publications. Other studies point to a perception gap that affects submission rates. @brown_horiuchi_htun_samuels_2020, for example, argue that some journals, like American Political Science Review, American Journal of Political Science, and Political Analysis are perceived to be "masculinized" with men significantly more likely than women to state that they would submit their manuscripts to these journals. 
+Moreover, men are more likely than women to be optimistic about their chances of successful publication in these journals, a perception that is maintained even when controlling for scholars' methodological approach. @hancock_women_2013 (in International Studies) and @key_sumner_2019 suggest that differences in area of study and/or applied methodology explain the gender gap in submissions, while @djupe_smith_sokhey_2019 find that the gender gap persists within methodological approaches---women who state that their work is primarily quantitative-statistical submit fewer papers for review than their male colleagues.
+
+We propose to look at a different possible explanation, one that is potentially of large consequences when it comes to employing CTAM.
+@brown_horiuchi_htun_samuels_2020 speculate that women are also more risk averse than men and are therefore less willing to submit their work to journals with high rejection rates (see @djupe_smith_sokhey_2019 and @key_sumner_2019 for similar arguments).
+@djupe_smith_sokhey_2019 also find that male assistant professors "flood" the review process with submissions and receive a higher number of rejections, while @koenig_ropers_2018, finding a similar pattern, speculate that this may suggest that "male and female authors have different quality standards when submitting their work in the first place..." (p. 851). @brown_horiuchi_htun_samuels_2020 similarly argue in a footnote that "it also could be the case that women scholars are more likely to underestimate the quality of their work and therefore are less likely to submit..." (p. 120, fn 10).
 
 
-# Is Mathilda Playing it Safe?
-We have condected an expert survey, inviting all scholars who had published a scientific article using quantitative text analysis between January 2016 and September 2020  in one of the 20 highest ranked journals in Communications, Political Science, Sociology, and Psychology [for details, see @baden2021three].
+# The Matilda Effect
+
+While it is difficult to determine what is the root cause of the gender differences in self-perceptions of quality of work and the prospects of successful publication, we suggest that this may be related to the Matthew Effect and its mirror the Matilda Effect.
+Made famous in the late 1960s by the American sociologist Robert K. Merton, the Matthew Effect refers to the over-recognition of scholars at the top of the scientific profession.
+This over-recognition is rooted in a cycle wherein those who already have (recognition) gain more of it, while those who have little, will continue to have little.
+As men have historically been at the top of the scientific profession, the "trickle down" influence of the Matthew Effect can be observed in the gendered patterns discussed above.
+Thus, while it may indeed be the case that the publication process and its outcomes are not purposefully biased against women scholars, there is nevertheless a systematic gender difference in academic publishing we can trace that is linked to other gendered imbalances in the profession. In particular, co-authored manuscripts are more likely to be published, and the rise in co-authorship is primarily driven by all-male teams [@teele_thelen_2017]. And, even if men and women are equally likely to co-author [@djupe_smith_sokhey_2019], male scholars benefit significantly more from such collaborations in terms of both submissions and publications.
+Why? Similar to their argument above about differences in publication strategies due to differentiated socialization, @brown_horiuchi_htun_samuels_2020[p.119] speculate that "something happens to men in their collaborative networks that bolsters their likelihood to submit papers and to resubmit previously rejected papers. Younger male scholars in highly productive collaborative groups may be more likely to receive encouragement for and to develop early habits of frequent article submission. They also may feel more inoculated against the morale-damaging effects of rejection from top-tier journals".
+
+What does it mean that men are more likely than women to collaborate and therefore produce more work for publication? The flip side of this argument is the observation from @brown_samuels_2018[p. 329] that "to the extent that women are less likely to be invited onto a team or form collaborations themselves (perhaps because mentors do not think to encourage them to do so), they are less likely to expand their citation networks, less likely to get cited, and less likely to rise through the ranks...".
+This, in turn, can be linked to the mirror of the Matthew Effect---the *Matilda Effect*.
+Coined by Margaret W. Rossiter in 1993, the Matilda Effect refers to the under-recognition of women in the sciences and the social sciences [@rossiter1993matthew], a phenomenon that persists across decades. For example, in the early 1990s, @cole_singer_1991 observed that while there is not much gender difference in achievement levels at the early stages of academic careers, women's careers trajectories are affected more by negative results than those of men. Numerous studies also document gender distortions in citations [@tatalovich_frendries_2019; @maliniak_powers_walter_2013; @samuels_teele_2021; @dion_sumner_mitchell_2018; @ferber_gender_2011]; promotion [@key_sumner_2019; @kim_grofman_2019; @maliniak_etal_2008] and visibility on graduate syllabi [@phull_gender_2019; @colgan_where_2016]. @tatalovich_frendries_2019 further show that while women win more awards today than in the past, they are still unable to match the scholarly recognition men receive for their work.
+
+The focus on and use of computational text analysis as grown significantly in recent years and has taken a prominent place in the study of political texts within the discipline [see for example: @lazer2020computational; @salganik2019bit].
+Within computational text analysis, and quantitative research methodology in general, women are particularly underrepresented, studies showing a gender gap across levels in these fields. For example @gatto2020selecting found that women, on average, cover significantly fewer methods courses in their graduate training compared to their male colleagues, and that women are more likely than men to complete qualitative methods courses. @barnes_2018 shows that women are less likely to be lecturers in quantitative methods courses. Furthermore, while @gatto2020selecting also found that when women do participate in methods training they show similar levels of method employment as their male colleagues, @shannon2014barriers and @esarey_2018 found that even when women do use the same methods as men, they are less likely to characterize themselves as methodologists. This echoes findings from @morrow_box_2014 and @shannon2014barriers that women's self-evaluation of math-related qualifications tends to be lower than men's, even when they outperform them. Still further, @teele_thelen_2017 and @brown_samuels_2018 show that women are less likely to publish studies using quantitative and computational methods, @maliniak_powers_walter_2013 making a similar argument in International Relations studies.
+
+# Expectatations
+
+Contributing to the discussion about the last of these observations and focusing on the gender gap in submissions of manuscripts that use computational text analysis methods, we propose two possible explanations, albeit indirect, to why women might submit fewer papers that use computational text analysis methods than men: a) playing it safe due to the gender perception gap of journals, and b) the Matilda effect.
+Papers using CTAM are more likely to be published in journals with a *"masculinized" perception gap*. These are journals that "men are significantly more likely than women to state that they would submit a manuscript and/or be optimistic about their chances of publication" [@brown_horiuchi_htun_samuels_2020, p.115]. Moreover, given that women may tend to also be more risk averse than men [@brown_horiuchi_htun_samuels_2020], when women are aiming for these journals, it could be that they \`\`play it safe'' by conducting more validation checks than their male colleagues.
+Moreover, embracing the idea of the *Matilda effect*---that a lot more effort is required to women to succeed in academia due to systematic under-recognition---women scholars are more likely to indicate that a) there are important training needs in more areas; and b) they themselves need (further) training in computational methods and use these reasons to not submit, or submit less work that employs these methods. That is, as women embrace the underlying notion of the Matilda Effect they perceive that they need to work that much harder to prove themselves to be at the same level as men in order to reach at par results. 
+We examine the following hypotheses:
+
+**Play it Safe hypothesis** (*H1a*): Women scholars are more likely to play it safe and indicate more validation strategies than men scholars.
+
+**Play it Safe hypothesis** (*H1b*): Women scholars are more likely to play it safe and indicate more challenges as reasons **not** to use CTAM than men scholars.
+
+**Matilda effect hypothesis** (*H2a*): Women scholars are more likely to indicate a higher number of important training needs than men scholars.
+
+**Matilda effect hypothesis** (*H2b*): Women scholars are more likely to indicate that they themselves require (further advanced) training than men scholars.
+
+# Data & Measures
+
+We have conducted an expert survey, inviting all scholars who had published a scientific article using quantitative text analysis between January 2016 and September 2020 in one of the 20 highest ranked journals in Communications, Political Science, Sociology, and Psychology [for details, see @baden2021three].
 Quantitative textual analysis was defined broadly to include any form of processing natural language that identified specific kinds of textual contents with the purpose of classification and quantitative analysis.
-Using a keyword search on the Web of Science, we identified a total of `7,296` _potentially_ relevant articles out of the `45,437` published articles, whose abstract suggested any kind of textual content or test analytic procedures. 
+Using a keyword search on the Web of Science, we identified a total of `7,296` *potentially* relevant articles out of the `45,437` published articles, whose abstract suggested any kind of textual content or test analytic procedures.
 Articles were considered relevant as soon as they used any form of quantitative textual analysis, even if it was used merely in an auxiliary capacity (e.g., a content analysis to identify frames to be used in an experiment; sentiment analyses of open-ended survey responses).[^1]
 This screening yielded a total of `854` articles, for which the authors were looked up.
-This gave us `1,653` identifiable and working email-addresses. 
+This gave us `1,653` identifiable and working email-addresses.
 The experts have been invited to the questionnaire on March 4th of 2021, and received two reminders, each approximately a week after our last message (respectively on March 11th and March 16th of 2021).
 This yielded a responses of `433` responses (i.e. response rate of `25%`).
-The study has been approved by the Research Ethics Review Committee of the [_Vrije Universiteit Amsterdam_](#), [_Hebrew University Jerusalem Isreal_](#), and [_University College Dublin_](#).
+The study has been approved by the Research Ethics Review Committee of the [*Vrije Universiteit Amsterdam*](#), [*Hebrew University Jerusalem Isreal*](#), and [*University College Dublin*](#).
 
-[^1]: Analyses that relied solely on metadata or pre-existing classification were excluded, as were investigations accessing only formal properties of the sampled texts (e.g., length). We included analyses of multi-modal media (e.g., posters, television) as long as the textual contents were informative toward classification. Purely methodological contributions discussing specific potentials or limitations of available methods were excluded, unless they included applied demonstrations wherein actual textual data were processed. 
+[^1]: Analyses that relied solely on metadata or pre-existing classification were excluded, as were investigations accessing only formal properties of the sampled texts (e.g., length).
+    We included analyses of multi-modal media (e.g., posters, television) as long as the textual contents were informative toward classification.
+    Purely methodological contributions discussing specific potentials or limitations of available methods were excluded, unless they included applied demonstrations wherein actual textual data were processed.
 
-```{r data-descrip, out.width = "100%", fig.align = 'center', fig.cap = "\\label{fig:descr}Gender Break-Down in Variables under Study"}
+```{r data-descrip, out.width = "100%", fig.align = 'center', fig.cap = "\\label{fig:descr}Gender Break-Down in Variables under Study", fig.pos="t"}
 knitr::include_graphics(here::here("report/figures", "explorative-1.png"))
 ```
 
-To survey the field on different aspects of potential 'playing it safe' strategies when it comes to CTAM, we have asked participants to list how many of five pre-defined validation strategies[^2] they use, as well as if they use other strategies (open answer posibility). 
-Additionally, we asked participants to what extent 14 pre-defined reasons are challenges for them _not_ to use CTAM.[^3]
-Answer options where `no challenge`, `minor challenge`, `major challenge`.
-In the analyses, we grouped minor and major challenges together and compared them to no challenges reported.
-To gauge a possible 'Mathilda effect', we have asked our experts to list if the field in general needs more training possibilities when it comes to data and open access tools, programming and software skills, theory and concepts, research integrity and ethics, or other training skills -- for each option there was the possiblity to specify what was needed. 
+To survey the field on different aspects of potential 'playing it safe' strategies when it comes to CTAM, we have asked participants to list how many of five pre-defined validation strategies[^2] they use, as well as if they use other strategies (open answer posibility).
+Additionally, we asked participants to what extent 14 pre-defined reasons are challenges for them *not* to use CTAM.
+[^3] Answer options where `no challenge`, `minor challenge`, `major challenge`. In the analyses, we grouped minor and major challenges together and compared them to no challenges reported
+. To gauge a possible 'Matilda effect', we have asked our experts to list if the field in general needs more training possibilities when it comes to data and open access tools, programming and software skills, theory and concepts, research integrity and ethics, or other training skills -- for each option there was the possibility to specify what was needed.
 Moreover, we have also asked the participants if they themselves need more training. 
-In all our analyses, we control for whether or not the participant uses CTAM themselves, the types of content analyses they use in their work, and their pre-existing knowledge of statistical software.
-Figure \ref{fig:descr} demonstrates the gender break-down in our sample for the dependent variables as well as the control variables.
-While the descriptive statistics (average and standard deviation) do not show gender differences, we do see in the top-right panel that men in our sample are over-represented. Yet where we have roughly the same amount of women scholars using CTAM as not using CTAM (i.e. using quantitative or qualitative manual content analysis), our sample has more men scholars using CTAM than not using CTAM.
+In all our analyses, we control for whether or not the participant uses CTAM themselves, the types of content analyses they use in their work, and their pre-existing knowledge of statistical software. 
+Figure \ref{fig:descr} demonstrates the gender break-down in our sample for the dependent variables as well as the control variables. 
+While the descriptive statistics (average and standard deviation) do not show statistically signiificant gender differences, we do see in the top-right panel that men in our sample are over-represented. Yet where we have roughly the same amount of women scholars using CTAM as not using CTAM (i.e. using quantitative or qualitative manual content analysis), our sample has more men scholars using CTAM than not using CTAM.
+Moreover, the top-left panel shows that women report men report fewer challenges for uptaking computational methods than women do.
 
-[^2]: The pre-defined validation strategies are: 1) _I check the documentation of the software developer_; 2) _I check whether findings are plausible and interpretable_; 3) _I compare machine-made classifications (i.e. coded outputs) against manually coded/given standards_; 4) _I check whether the classification rules/criteria are valid (e.g., check for meaningful indicators in adictionary)_; and 5) _I evalute how well the algorithmic procedures match my concept of interest (e.g., checking adequacy of bag-of-words assumption)_.
+[^2]: The pre-defined validation strategies are: 1) *I check the documentation of the software developer*; 2) *I check whether findings are plausible and interpretable*; 3) *I compare machine-made classifications (i.e. coded outputs) against manually coded/given standards*; 4) *I check whether the classification rules/criteria are valid (e.g., check for meaningful indicators in adictionary)*; and 5) *I evalute how well the algorithmic procedures match my concept of interest (e.g., checking adequacy of bag-of-words assumption)*.
 
-[^3]: The pre-defined challenges are: 1) _Time/effort required (e.g. technical requirements, experience)_; 2) _Funding required (e.g., for training, fees)_; 3) _Availability of required training in computational methods_; 4) _Limited methodological guidance/documentation of tools_; 5) _Level of instruction and materials higher than needed_; 6) _Level of instruction/materials lower than needed_; 7) _Availability of suitable computational tools for certain languages_; 8) _Comparability of computational tools in different languages_; 9) _Issues concerning measurement validity/limited nuance_; 10) _Loss of manual contact with the material_; 11) _Reviewers'/editors'' skepticism toward computational methods among_; 12) _Peers' skepticism toward computational methods_; 13) _I am skeptical toward computational methods myself_; and 14) _Other challenges: (Open ended)_.
+[^3]: The pre-defined challenges are: 1) *Time/effort required (e.g. technical requirements, experience)*; 2) *Funding required (e.g., for training, fees)*; 3) *Availability of required training in computational methods*; 4) *Limited methodological guidance/documentation of tools*; 5) *Level of instruction and materials higher than needed*; 6) *Level of instruction/materials lower than needed*; 7) *Availability of suitable computational tools for certain languages*; 8) *Comparability of computational tools in different languages*; 9) *Issues concerning measurement validity/limited nuance*; 10) *Loss of manual contact with the material*; 11) *Reviewers'/editors'' skepticism toward computational methods among*; 12) *Peers' skepticism toward computational methods*; 13) *I am skeptical toward computational methods myself*; and 14) *Other challenges: (Open ended)*.
 
+# Is Matilda Playing it Safe?
 
 To test our pre-registered hypotheses, we ran a OLS regression and visualize the results in Figure \ref{fig:pre-reg-h} and \ref{fig:dv-types} with an one-tailed $\alpha$ of `0.05`.
-We present the regression tables in Appendix **XX**. 
-Looking at the variables measuring 'playing it safe' strategies, i.e. reporting number of validation strategies and number of challenges, Figure \ref{fig:pre-reg-h} demonstrates that women scholars do not report more validation strategies than men. 
-While not statistically significant for the full sample as well as for the split sample using CTAM, we see the opposite: Women scholars report to use less validation strategies.
-In the top-left panel of Figure \ref{fig:dv-types}, we inspect the gender differences in the type of validation strategies reported. 
-This shows that the only strategy women scholars are statistically significantly less likely to report compared to men scholars is checking the documentation of the software developer. 
-Women scholars are more likely to report to use the validation strategies of checking algortihmic procedures and checking against the gold standard.
+Looking at the variables measuring 'playing it safe' strategies, i.e. reporting number of validation strategies and number of challenges, Figure \ref{fig:pre-reg-h} demonstrates that women scholars do not report more validation strategies than men.
+However, women that use qualitative methods report to use less validation strategies.
+This can potentially be explained by the fact that qualitative text analysis involves fewer validation strategies.
+In the top-left panel of Figure \ref{fig:dv-types}, we inspect the gender differences in the type of validation strategies reported.
+This shows that the only strategy women scholars are statistically significantly less likely to report compared to men scholars is checking the documentation of the software developer.
+In the Research Software Community, there is a recent uptake on addressing inclusiveness to address this disparity (e.g. see, Van der Velden, 2023).
+Women scholars are more likely to report to use the validation strategies of checking algorithmic procedures and checking against the gold standard.
 This is only borderline non-significant, most likely due to the small number of women in our sample.
 For the other playing it safe strategy -- i.e. number of challenges reported -- Figure \ref{fig:pre-reg-h} demonstrates that women scholars are more likely to report challenges, but this effect is not statistically significant.
-Breaking down the challenges in the right-hand panel of Figure \ref{fig:dv-types} do demonstrate interesting gender patterns.
-Women are more likely to report time/effort, funding, and training needs as well as limitied methodological guidance of the tools as a challenge to not using CTAM.
-Men scholars, however, are more taken back by peers' and editors' skepticism towards the method. 
+Breaking down the challenges, shown in the right-hand panel of Figure \ref{fig:dv-types}, does demonstrate an interesting gender pattern.
+Women are more likely to report time/effort, funding, and training needs as well as limited methodological guidance of the tools as a challenge to not using CTAM.
+Men scholars, however, are more taken back by peers' and editors' skepticism towards the method.
+This is a mild indication of the Matilda Effect at play: Men, more likely to be confident of being recognized for their work, place a higher premium on peer perception while women, taken in by the Matilda Effect, think a lot more effort is required of them to be successful.
 
-```{r pre-reg-h, out.width = "80%", fig.align = 'center', fig.cap = "\\label{fig:pre-reg-h}Effect of Being Female on Reported Validation Strategies, Challenges, and Training Needs"}
+```{r pre-reg-h, out.width = "80%", fig.align = 'center', fig.cap = "\\label{fig:pre-reg-h}Effect of Being Female on Reported Validation Strategies, Challenges, and Training Needs", fig.pos="H"}
 knitr::include_graphics(here::here("report/figures", "h-pre-reg-1.png"))
 ```
 
-Investigating a possible Mathilda effect, Figure \ref{fig:pre-reg-h} demonstrates that women scholars are more likely to report more training needs, but this effect is not statistically significant.
-Looking at the type of training needs in the bottom-left panel of Figure \ref{fig:dv-types}, we see that the insignificance of the aggregated training needs stems from women using CTAM and using manual content analysis reporting opposite needs:
-Women in CTAM, report general needs for training in research integrity and ethics as well as for training in concepts, whereas women not using CTAM report general training needs for programming and software skills as well as for data and open access tools.
-When it comes to individual training needs, women scholars using CTAM do report they need more training compared to men scholars using CTAM. 
+Investigating a possible Matilda effect, Figure \ref{fig:pre-reg-h} demonstrates that women scholars are more likely to report more training needs, but this effect is not statistically significant.
+Looking at the type of training needs in the bottom-left panel of Figure \ref{fig:dv-types}, we see that the insignificance of the aggregated training needs stems from women using CTAM and using manual content analysis reporting opposite needs: Women in CTAM, report general needs for training in research integrity and ethics as well as for training in concepts, whereas women not using CTAM report general training needs for programming and software skills as well as for data and open access tools.
+When it comes to individual training needs, women scholars using CTAM do report they need more training compared to men scholars using CTAM.
+This is supposedly the Matilda Effect at work, given that research suggest that women are less likely to be invited on projects [@evans_moulder_2011; @koenig_ropers_2018].
+Using the data of @baden2021three, we see that women are less likely to be first author -- `47%` of published papers on text analysis have an author with a female first name. An independent `t-test` confirms that this difference is statistically significant. 
+The same holds for second and third authors -- they are statistically significant more likely to be male.
+This could lead to the perception that _if one had more training_, one would be asked to join projects too.
 
-```{r types-dv, out.width = "100%", fig.align = 'center', fig.cap = "\\label{fig:dv-types}Effect of Being Female on Reported Type of Validation Strategies, Challenges, and Training Needs"}
+```{r types-dv, out.width = "100%", fig.align = 'center', fig.cap = "\\label{fig:dv-types}Effect of Being Female on Reported Type of Validation Strategies, Challenges, and Training Needs", fig.pos="H"}
 knitr::include_graphics(here::here("report/figures", "types-dv-1.png"))
 ```
 
 In addition to the pre-registered effects, we have explored the interaction with discipline and stage of the career of scholars, as demonstrated in Figure \ref{fig:explor}.
-The left-hand panel of Figure \ref{fig:explor} shows that compared to communication  and political science, the other disciplines (grouping sociology, psychology, and economy), where computational methods were less common, we see support for both our playing it safe and Mathilda effect hypotheses. 
-This can be optimistically interpreted: When the CTAM is more prevalent in the discipline, women scholars catch up quickly. 
+The left-hand panel of Figure \ref{fig:explor} shows that compared to communication and political science, the other disciplines (grouping sociology, psychology, and economy), where computational methods were less common, we see support for both our playing it safe and Matilda effect hypotheses.
+This can be optimistically interpreted: When CTAM is more prevalent in the discipline, women scholars catch up quickly.
 The right-hand panel of Figure \ref{fig:explor} demonstrates that none of the reported results are driven by a particular career stage of scholars.
 
-```{r explor-results, out.width = "100%", fig.align = 'center', fig.cap = "\\label{fig:explor}Marginal Effect of Being Female on Reported Validation Strategies, Challenges, and Training Needs"}
+```{r explor-results, out.width = "100%", fig.align = 'center', fig.cap = "\\label{fig:explor}Marginal Effect of Being Female on Reported Validation Strategies, Challenges, and Training Needs", fig.pos="H"}
 knitr::include_graphics(here::here("report/figures", "explorative-2.png"))
 ```
 
-**ADDITIONAL CHECK: ARE WOMEN LESS LIKELY TO BE FIRST AUTHOR?**
 
-# Conclusion
-[\textcolor{red}{TBA}]
+# Discussion
 
+This article presents an analysis of recently collected data from an a pre-registered expert survey of all authors of quantitative text analytic research identified via a unique content analysis of research articles published in the top 20 journals in communication science, political science, sociology and psychology between 2016 and 2020 (`N = 854 articles`).
+Using these data, our aim was to understand whether and how using CTAM differs between men and women scholars. 
+According to the existing literature, gender gaps in methods training and applications can have broader consequences for academic careers. 
+Our findings our slightly optimistic: In social science disciplines where CTAM has become more prevalent, women scholars catch up quickly and we see hardly any gender differences.
+It is important to note that we have conducted a very hard test: Women that have published on and are engaged with text analyses methods.
+This group is a least-likely group for gender disparities to occur, since the expectation of discrimination already influences women's decision to submit manuscripts or not [@koenig_ropers_2018] -- i.e. women that have submitted and went through the review-process are based on a particular self-selected sample.
+It is therefore remarkable and telling that even in this curated sample, we still find some indications for the Matilda effect.
+
+We show that for the "playing it safe" strategy, there are no statistically significant differences between men and women for the whole sample. 
+When we split the sample according to disciplines, we see that in the disciplines where CTAM is more or less mainstream, the main conclusion holds. 
+In disciplines where this is not the case, women play it safe.
+This aligns with @hill_hurley_2022's finding that time in the profession is crucial for publication gaps, albeit the fact that men especially benefit from this cohort effect compared to women.
+Possible, when CTAM is more embedded in the discipline, the gender imbalance is not as apparent anymore.
+Men traditionally benefit more from collaborations [e.g. see @djupe_smith_sokhey_2019], especially at the early career stage which is arguably crucial in influencing retention in the profession.
+We do not see that this relationship is rank dependent, while rank is typically something that alleviates the gender difference in the submission process [@brown_samuels_2018].
+That is great news, since the early career stage is arguably crucial in influencing retention in the profession.
+
+Looking deeper into how women play it safe, we see that women are more likely to check if what they do computationally is in line with what the program/algorithm says it does.
+However, they are less likely to check "under the hood" of the used program.
+In similar vein, the biggest challenges for women not to use CTAM are a) the limited methodological guidance and documentation of the software; and b) the time one has to invest -- supposedly -- to learn these methods.
+This ties in with the work on socialization into the profession: "[D]ecisions about where to submit, how often-and whether and where to submit... tend to be shaped by interpersonal contacts and information communicated through social networks, as well as habits acquired through collaborative relationships, which often differ by gender" [@brown_horiuchi_htun_samuels_2020 p.119].
+Additionally, this finding about women's biggest challenges collides with the Matilda Effect findings: Women report to be scared away by things that seem technical and therefore would cost them a lot of effort.
+
+Our results do indicate a Matilda effect at work: Women report that there are in general enough training offered, but that *they* would need more training before up-taking these methods. 
+This could align with (perceived) success they have had publishing papers using CTAM or just attempting to apply these methods.
+Previous success creates both a sense of accomplishment and achievement that fosters confidence in future success as well as leads to actual success, since more publications result in a more successful career.
+If men experience this more than women over time (the combined influence of the Matthew and the Matilda effects), and men are at the heart of the networks that socialize yet more men into the same perceptions and attitudes, there perpetuates an environment that is ultimately more supportive of the successful development of men's academic careers than women's. That is, the under-recognition of women's work results, whether purposefully or not, in the perception that a lot more effort is required for women to succeed in the profession. 
+
+Our findings especially underline the persistence of the Matilda Effect in academic work.
+The under-recognition of women in the sciences and the social sciences [@rossiter1993matthew], endures across decades.
+Even if this is mitigate in recent years, where women are more recognized vis-à-vis the past, they are still unable to match the scholarly recognition men receive for their work [@tatalovich_frendries_2019].
+It is therefore of utmost importance that data and training infrastructure projects take gender disparities, especially those coming from long gendered history serious and accommodate alleviation strategies.
 
 \newpage
+
 # References
-
-
