@@ -90,6 +90,25 @@ d <- df %>%
                                     "Early-Career Researcher (<5 years since PhD)",
                                     "Mid-Career Researcher (5-15 years since PhD)",
                                     "Senior Researcher (>15 years since PhD)")))
+
+tmp <- df %>% 
+  select(Q10_1l = Q10_1,
+         Q10_2l = Q10_2,
+         Q10_3l = Q10_3,
+         Q10_4l = Q10_4,
+         Q10_5l = Q10_5,
+         Q10_6l = Q10_6,
+         Q10_7l = Q10_7,
+         Q10_8l = Q10_8,
+         Q10_9l = Q10_9,
+         Q10_10l = Q10_10,
+         Q10_11l = Q10_11,
+         Q10_12l = Q10_12,
+         Q10_13l = Q10_13,
+         Q10_14l = Q10_14,
+         Q10_15l = Q10_15)
   
+d <- d %>% 
+  add_column(tmp)
 remove(df)
                 

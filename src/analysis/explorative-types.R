@@ -28,7 +28,7 @@ pv <- m %>%
              ymin = lower, ymax = upper, color = term)) +
   geom_point(position = position_dodge(.5), size = 3) + 
   geom_errorbar(position = position_dodge(.5), width = 0, alpha = .6) +
-  mdthemes::as_md_theme(theme_ipsum()) +
+  theme_ipsum(axis_text_size = 14) +
   labs(x = "", 
        y = "",
        title = "**Validation (H1a)**") +
@@ -78,7 +78,7 @@ pc <- m %>%
              ymin = lower, ymax = upper, color = term)) +
   geom_point(position = position_dodge(.5), size = 3) + 
   geom_errorbar(position = position_dodge(.5), width = 0, alpha = .6) +
-  mdthemes::as_md_theme(theme_ipsum()) +
+  theme_ipsum(axis_text_size = 14) +
   labs(x = "", 
        y = "",
        title = "**Challenges (H1b)**",
@@ -119,7 +119,7 @@ pt <- m %>%
              ymin = lower, ymax = upper, color = term)) +
   geom_point(position = position_dodge(.5), size = 3) + 
   geom_errorbar(position = position_dodge(.5), width = 0, alpha = .6) +
-  mdthemes::as_md_theme(theme_ipsum()) +
+  theme_ipsum(axis_text_size = 14) +
   labs(x = "", 
        y = "",
        title = "**Training (H2a)**") +

@@ -33,7 +33,7 @@ p <- m1 %>%
              ymin = lower, ymax = upper, color = term)) +
   geom_point(position = position_dodge(.5), size = 3) + 
   geom_errorbar(position = position_dodge(.5), width = 0, alpha = .6) +
-  mdthemes::as_md_theme(theme_ipsum()) +
+  theme_ipsum(axis_text_size = 14) +
   labs(x = "", 
        y = "Effect of Identifying as Female on Dependent Variable",
        caption = "*Estimates with 95% CI (one-sided)*") +

@@ -1,13 +1,13 @@
 Prepare Data
 ================
 
--   [Required Packages &
-    Reproducibility](#required-packages--reproducibility)
--   [Tidy Data](#tidy-data)
--   [Save Data for Analysis](#save-data-for-analysis)
--   [Visualization of Data](#visualization-of-data)
-    -   [Dependent Variable per Gender](#dependent-variable-per-gender)
-    -   [Correlations Matrix](#correlations-matrix)
+- [Required Packages &
+  Reproducibility](#required-packages--reproducibility)
+- [Tidy Data](#tidy-data)
+- [Save Data for Analysis](#save-data-for-analysis)
+- [Visualization of Data](#visualization-of-data)
+  - [Dependent Variable per Gender](#dependent-variable-per-gender)
+  - [Correlations Matrix](#correlations-matrix)
 
 ## Required Packages & Reproducibility
 

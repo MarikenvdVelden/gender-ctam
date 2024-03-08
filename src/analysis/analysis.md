@@ -16,26 +16,6 @@ source(here::here("src/lib/functions.R"))
 load(here("data/intermediate/clean_data.RData"))
 ```
 
-Next, we automatically extract a `.md` file for the online appendix, as
-well as a latex table for the manuscript. We are using jinja2 template
-[src/analysis/table_descriptives.tex.j2](table.tex.j2) which is called
-with a json string containing the data. To replicate, make sure
-`env/bin/pip install -U j2cli` is installed via your command line.
-
-``` r
-source(here("src/analysis/descriptive-information-overview.R"))
-table2 <- knitr::kable(descr, digits=2)
-fn <- here("report/figures/table_descriptives.tex")
-cat("# Table: Descriptive Information of Variables under Study \n\n", file=fn)
-cat(table2, file=fn, sep="\n", append=T)
-
-methodnames <- setNames(as.list(descr$Variables), descr$Variables)
-table <- purrr::map(descr, .f= ".") 
-#render_j2(here("src/analysis/table_descriptives.tex.j2"), here("report/figures/table_descriptives.tex"),
-#          data=list(data=table, methods=methodnames))
-rm(descr, methodnames, table, fn, table2)
-```
-
 ## Pre-Registered Hypotheses
 
 ``` r
@@ -161,3 +141,25 @@ source(here("src/analysis/explorative-types.R"))
 ```
 
 <img src="../../report/figures/types-dv-1.png" style="display: block; margin: auto;" />
+
+# T-test authorship ranking
+
+``` r
+source(here("src/analysis/Review.R"))
+r1
+```
+
+<img src="../../report/figures/ttest-1.png" style="display: block; margin: auto;" />
+
+``` r
+source(here("src/analysis/challenges.R"))
+c1
+```
+
+<img src="../../report/figures/challenges-distribution-1.png" style="display: block; margin: auto;" />
+
+``` r
+c2
+```
+
+<img src="../../report/figures/challenges-distribution-2.png" style="display: block; margin: auto;" />

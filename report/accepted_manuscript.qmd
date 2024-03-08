@@ -1,60 +1,27 @@
 ---
-output: 
-  stevetemplates::article:
-    fig_caption: true
-bibliography: references.bib
-urlcolor: black
-linkcolor: black
-header-includes:
-   - \usepackage{floatrow}
-   - \floatsetup[figure]{capposition=top}
-   - \floatsetup[table]{capposition=top}
-   - \usepackage{booktabs}
-   - \usepackage{longtable}
-   - \usepackage{array}
-   - \usepackage{multirow}
-   - \usepackage{wrapfig}
-   - \usepackage{float}
-   - \usepackage{colortbl}
-   - \usepackage{pdflscape}
-   - \newcommand{\blandscape}{\begin{landscape}}
-   - \newcommand{\elandscape}{\end{landscape}}
-   - \usepackage{tabu}
-   - \usepackage[para,online,flushleft]{threeparttable}
-   - \usepackage{threeparttablex}
-   - \usepackage[normalem]{ulem}
-   - \usepackage{makecell}
-   - \usepackage{xcolor}
-   - \usepackage{hyperref}
-   - \usepackage{array}   
-   - \usepackage{caption}
-   - \usepackage{graphicx}
-   - \usepackage{epstopdf}
-   - \usepackage{siunitx}
-   - \usepackage{multirow}
-   - \usepackage{hhline}
-   - \usepackage{calc}
-   - \usepackage{tabularx}
-   - \usepackage{fontawesome}
-   - \usepackage{amsthm}
-   - \newtheorem{hypo}{Hypothesis}
-biblio-style: apsr
 title: "Is Matilda Playing it Safe? Gender in Computational Text Analysis Methods"
 author:
-  - name: Mariken A.C.G. van der Velden
-  - affiliation:  Dept. of Communication Science, Vrije Universiteit Amsterdam
-  - name: Alona O. Dolinsky
-  - affiliation:  Dept. of Communication Science, Vrije Universiteit Amsterdam
-anonymous: TRUE
-abstract: "Numerous studies document the gender gap in published articles in political science journals, observing systematic imbalances in the submission pool which result in a distored publication pattern. In this study we test some pathways that may explain the distorted submission pool: a) playing it safe due to the gender perception gap, and b) as a consequence of the Matilda effect setting a higher bar for methodological knowledge, focusing on papers using Computational Text Analysis methods. Papers using Computational Text Analysis Methods are more likely to be published in journals with a 'masculinized' perception gap. When women are aiming for these journals, they might 'play it safe' by conducting more validation checks than their male colleagues. Moreover, embracing the Matilda effect – i.e. internalizing the systematic under-recognition of female scientists and mis-attribution of, especially methodological skills, to men – women scholars are more likely to indicate that a) there are important training needs in more areas; and b) they themselves need (further) training in computational methods and use these reasons not to publish papers employing these methods. We test these claims using a) a unique content analysis of research articles published in the top 20 journals in communication science, political science, sociology and psychology between 2016 and 2020, identifying all 854 articles that involved some form of quantitative textual analysis; and b) a pre-registered expert survey of all authors of quantitative text analytic research identified via said content analysis, which inquired about researchers’ considerations and concerns in the application of computational text analytic strategies."
-keywords: "Computational Text Analyses Methods, Gender, Expert Survey"
-geometry: margin=1in
-mainfont: cochineal
-fontsize: 11pt
-doublespacing: TRUE
-endnote: no
-pandocparas: TRUE
-sansitup: FALSE
+- name: Mariken A.C.G. van der Velden
+  affiliation: Dept. of Communication Science, Vrije Universiteit Amsterdam
+- name: Alona O. Dolinsky
+  affiliation: Dept. of Communication Science, Vrije Universiteit Amsterdam
+abstract: |
+  Numerous studies document the gender gap in published articles in political science journals, observing systematic imbalances in the submission pool which result in a distored publication pattern. In this study we test some pathways that may explain the distorted submission pool: a) playing it safe due to the gender perception gap, and b) as a consequence of the Matilda effect setting a higher bar for methodological knowledge, focusing on papers using Computational Text Analysis methods. Papers using Computational Text Analysis Methods are more likely to be published in journals with a 'masculinized' perception gap. When women are aiming for these journals, they might 'play it safe' by conducting more validation checks than their male colleagues. Moreover, embracing the Matilda effect – i.e. internalizing the systematic under-recognition of female scientists and mis-attribution of, especially methodological skills, to men – women scholars are more likely to indicate that a) there are important training needs in more areas; and b) they themselves need (further) training in computational methods and use these reasons not to publish papers employing these methods. We test these claims using a) a unique content analysis of research articles published in the top 20 journals in communication science, political science, sociology and psychology between 2016 and 2020, identifying all 854 articles that involved some form of quantitative textual analysis; and b) a pre-registered expert survey of all authors of quantitative text analytic research identified via said content analysis, which inquired about researchers’ considerations and concerns in the application of computational text analytic strategies.
+keywords: Computational Text Analyses Methods, Gender, Expert Survey
+volume: 1
+pubnumber: 1
+pubyear: 2019
+firstpage: 1
+bibliography: references.bib
+doi: 10.5117/CCR2019.1.001.VANA
+shortauthors: van der Velden & Dolinsky
+format:
+  ccr-pdf:
+    keep-tex: true
+pdf-engine: pdflatex
+# uncomment to get version for submission (anonymous and with watermark)
+# classoption:
+#   - review
 ---
 
 # Introduction

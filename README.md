@@ -2,7 +2,7 @@
 Online research compendium of the paper entitled _Gender &amp; Computation Social Science Publications_ . This repository combines the [pre-registration plan](docs/pap/pap.pdf) with a data &amp; analysis compendium.
 
 ## Draft
-View the [draft of the paper here](report/draft.pdf).
+View the [accepted manuscript here](report/accepted_manuscript.pdf).
 
 ## Pre-Registration Plan
 * [PAP](docs/pap/pap.pdf) The theoretical underpinnings and research design to test the implications of being a woman, compared to being a man, using computational social sciences (_hypotheses 1--2_).

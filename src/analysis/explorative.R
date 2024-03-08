@@ -11,7 +11,7 @@ descr_1 <- d %>%
                             `0` = "Not Using CTAM")) %>% 
   ggplot(aes(x = comp_txt2, y = percent, fill = gender)) +
   geom_col(width = .3) +
-  mdthemes::as_md_theme(theme_ipsum()) +
+  theme_ipsum(axis_text_size = 14) +
   labs(x = "", y = "% of sample (not) using CTAM",
        title = "**Using CTAM**") +
   scale_y_continuous(labels = scales::percent) +
@@ -45,7 +45,7 @@ descr <- d %>%
              ymin = lower, ymax = upper, color = gender)) +
   geom_point(position = position_dodge(.5), size = 3) + 
   geom_errorbar(position = position_dodge(.5), width = 0, alpha = .6) +
-  mdthemes::as_md_theme(theme_ipsum()) +
+  theme_ipsum(axis_text_size = 14) +
   labs(y = "", 
        x = "",
        title = "**Dependent Variables under Study**") +
@@ -81,7 +81,7 @@ descr_softw <- d %>%
              ymin = lower, ymax = upper, color = gender)) +
   geom_point(position = position_dodge(.5), size = 3) + 
   geom_errorbar(position = position_dodge(.5), width = 0, alpha = .6) +
-  mdthemes::as_md_theme(theme_ipsum()) +
+  theme_ipsum(axis_text_size = 14) +
   labs(y = "No Knowledge At All (1) - Primary Method of Research (5)", 
        x = "",
        title = "**Software Knowledge**") +
@@ -112,7 +112,7 @@ descr_method <- d %>%
              ymin = lower, ymax = upper, color = gender)) +
   geom_point(position = position_dodge(.5), size = 3) + 
   geom_errorbar(position = position_dodge(.5), width = 0, alpha = .6) +
-  mdthemes::as_md_theme(theme_ipsum()) +
+  theme_ipsum(axis_text_size = 14) +
   labs(y = "Never Use It (1) - Primary Method of Research (5)", 
        x = "",
        title = "**Type of Content Analysis**",
@@ -151,7 +151,7 @@ p_exp1 <- exp1 %>%
                      ymin = lower, ymax = upper, color = interact)) +
   geom_point(position = position_dodge(.5), size = 3) + 
   geom_errorbar(position = position_dodge(.5), width = 0, alpha = .6) +
-  mdthemes::as_md_theme(theme_ipsum()) +
+  theme_ipsum(axis_text_size = 14) +
   labs(x = "", 
        y = "",
        title = "**Discipline**") +
@@ -172,7 +172,7 @@ p_exp2 <- exp2 %>%
              ymin = lower, ymax = upper, color = interact)) +
   geom_point(position = position_dodge(.5), size = 3) + 
   geom_errorbar(position = position_dodge(.5), width = 0, alpha = .6) +
-  mdthemes::as_md_theme(theme_ipsum()) +
+  theme_ipsum(axis_text_size = 14) +
   labs(x = "", 
        y = "",
        title = "**Career Stage**",

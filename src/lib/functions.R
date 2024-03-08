@@ -10,6 +10,9 @@ library(qualtRics)
 library(margins)
 library(hrbrthemes)
 library(broom)
+library(haven)
+library(stringr)
+
 
 fig_cols <- yarrr::piratepal(palette = "basel", 
              trans = .2)
